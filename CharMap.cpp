@@ -39,14 +39,14 @@ char **char_array_alloc(int rows, int cols)
 	if (array_pointer == NULL)
 	{
 		printf("\nFailure to allocate room for the char array.");
-		exit(0);
+		exit(1);
 	}
 
 	row_pointer = (char**) malloc(rows * sizeof(row_pointer));
 	if (row_pointer == NULL)
 	{
 		printf("\nFailure to allocate room for pointers.");
-		exit(0);
+		exit(1);
 	}
 
 	// Initalise the pointers
