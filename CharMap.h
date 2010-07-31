@@ -1,23 +1,35 @@
-#pragma once
+/**	Header file for CharMap class
+ *	A CharMap object is basically just a glorified 2D char array.
+ *	When a graphical object, such as a Collidable object, is created, it
+ *	needs a CharMap to store the Unicode characters which will be used to
+ *	draw its graphical image in the terminal. This 2D array stores the
+ *	image and returns its contents when the object is called to be drawn.
+ */
+
+#ifndef CHARMAP_H_
+#define CHARMAP_H_
 
 class CharMap
 {
 public:
-	int num_rows; // Number of rows
-	int num_cols; // Number of cols
-	int start_x; // Start co-ordinate (printers co-ordinates)
-	int start_y; // End co-ordinate (printers co-ordinates)
+	int num_rows;	// Number of rows in the character map.
+	int num_cols;	// Number of columns in the character map.
 	char **map;	// A pointer to a static character map.
+	
+	// Default constructor
+	CharMap();
 
-	CharMap(int start_x, int start_y, int rows, int cols, char **map);
-	CharMap(CharMap *new_charMap); // Copies all new_charMap's datafields into it's own.
-	// No destructors: clean up after your own mess, slackass.
+	// Constructor with parameters
+	CharMap(int rows, int cols, char **p_map);
 
-	void print(); // Prints out the char_map
-	void replace( CharMap *copy ); // Replace all overlapping datafields with copy's.
-	int collision( CharMap *copy); // Test for a colisions. Checks that all characters in (this) are blank (' ').
+	// Copy constructor
+	CharMap(CharMap const &);
+
+	// Assignment operator
+	CharMap &operator=(CharMap const &);
+
+	// Destructor
+	virtual ~CharMap();
 };
 
-/*	Methods not particular to the map, but used for the 2d char array.	*/
-char **char_array_alloc(int rows, int cols);
-void char_array_test(char **charMap, int rows);
+#endif /* CHARMAP_H_ */
