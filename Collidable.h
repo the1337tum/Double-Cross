@@ -22,13 +22,16 @@ public:
 	char **map;	// A pointer to a static character map.
 
 	// Default constructor
-	virtual Collidable();
+	Collidable();
 
 	// Constructor with parameters
-	virtual Collidable(int x, int y, int rows, int cols, char **map);
+	Collidable(int p_x, int p_y, int rows, int cols, char **p_map);
 
 	// Copy constructor
-	virtual Collidable(Collidable *new_Collidable);
+	Collidable(Collidable const &);
+
+	// Assignment operator
+	Collidable &operator=(Collidable const &);
 
 	// Destructor
 	virtual ~Collidable();
@@ -36,12 +39,12 @@ public:
 	// draw()
 	// Tells the Level object to draw this Collidable object onto the next
 	// frame.
-	virtual int draw();
+//	virtual int draw();
 
 	// collide(Collidable c1)
 	// Determines what happens when this Collidable object collides into
 	// another Collidable object. (Explosions, hopefully!)
-	virtual int collide(Collidable c1);
-}
+//	virtual int collide(Collidable c1);
+};
 
 #endif /* COLLIDABLE_H_ */
