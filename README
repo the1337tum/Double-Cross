@@ -18,3 +18,9 @@ GITHUB:
 
 HTTP URL: http://github.com/the1337tum/Double-Cross
 SSH GIT URL:  git@github.com:the1337tum/Double-Cross.git
+
+-------------------
+
+RUN INSTRUCTIONS:
+
+TESTING: Compile and run "test.cpp"
