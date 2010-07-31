@@ -3,6 +3,7 @@
  *	CharMap.h
  */
 
+#include <stdio.h>
 #include "CharMap.h"
 
 // Constructor with parameters
@@ -26,3 +27,33 @@ CharMap& CharMap::operator=(CharMap const &c)
 
 // Destructor
 CharMap::~CharMap() { }
+
+// char_array_alloc()
+char **char_array_alloc(int rows, int cols)
+{
+	char **row_pointer;
+	char *array_pointer;	// Contiguous array pointer
+	int i;
+
+	array_pointer = (char*) malloc(rows * cols * sizeof(char));
+	if (array_pointer == NULL)
+	{
+		printf("\nFailure to allocate room for the char array.");
+		exit(0);
+	}
+
+	row_pointer = (char**) malloc(rows * sizeof(row_pointer));
+	if (row_pointer == NULL)
+	{
+		printf("\nFailure to allocate room for pointers.");
+		exit(0);
+	}
+
+	// Initalise the pointers
+	for (i = 0; i < rows; i++)
+	{
+		row_pointer[i] = array_pointer + (index * cols);
+	}
+
+	return row_pointer;
+}

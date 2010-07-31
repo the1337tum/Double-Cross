@@ -30,6 +30,10 @@ public:
 
 	// Destructor
 	virtual ~CharMap();
+
+	// char_array_alloc()
+	// Allocates memory for the CharMap
+	char **char_array_alloc(int rows, int cols);
 };
 
 #endif /* CHARMAP_H_ */
