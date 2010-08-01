@@ -10,10 +10,11 @@ int main(int argc, char *argv[]) {
 	char a;
 	char * b;
 	char ** c;
-	a = 'c';
+	a = 'x';
 	b = &a;
 	c = &b;
-	printf("Testing the CharMap class:\n");
 	CharMap * map = new CharMap(1, 1, c);
+	CharMap * m2 = new CharMap(*map); 
 	delete map;
+	delete m2;
 }
