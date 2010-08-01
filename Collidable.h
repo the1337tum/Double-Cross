@@ -21,9 +21,6 @@ public:
 	int num_cols;	// Number of columns in the character map.
 	char **map;	// A pointer to a static character map.
 
-	// Default constructor
-	Collidable();
-
 	// Constructor with parameters
 	Collidable(int p_x, int p_y, int rows, int cols, char **p_map);
 
