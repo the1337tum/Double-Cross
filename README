@@ -23,4 +23,4 @@ SSH GIT URL:  git@github.com:the1337tum/Double-Cross.git
 
 RUN INSTRUCTIONS:
 
-TESTING: Compile and run "test.cpp"
+Testing programs can be found in /test.
