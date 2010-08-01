@@ -7,8 +7,11 @@
 #include "CharMap.h"
 
 // Constructor with parameters
-CharMap::CharMap(int rows, int cols, char **p_map) :
-	num_rows(rows), num_cols(cols), map(p_map) { }
+CharMap::CharMap(int rows, int cols, char ** p_map) :
+	num_rows(rows), num_cols(cols), map(p_map)
+{
+	printf("A CharMap has been constructed.\n");
+}
 
 // Copy constructor
 CharMap::CharMap(CharMap const &c) :
@@ -26,13 +29,16 @@ CharMap& CharMap::operator=(CharMap const &c)
 }
 
 // Destructor
-CharMap::~CharMap() { }
+CharMap::~CharMap()
+{
+	printf("The CharMap has been destructed.\n");
+}
 
 // char_array_alloc()
-char **char_array_alloc(int rows, int cols)
+char** CharMap::char_array_alloc(int rows, int cols)
 {
-	char **row_pointer;
-	char *array_pointer;	// Contiguous array pointer
+	char ** row_pointer;
+	char * array_pointer;	// Contiguous array pointer
 	int i;
 
 	array_pointer = (char*) malloc(rows * cols * sizeof(char));
@@ -52,7 +58,7 @@ char **char_array_alloc(int rows, int cols)
 	// Initalise the pointers
 	for (i = 0; i < rows; i++)
 	{
-		row_pointer[i] = array_pointer + (index * cols);
+		row_pointer[i] = array_pointer + (i * cols);
 	}
 
 	return row_pointer;

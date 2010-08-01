@@ -15,12 +15,9 @@ public:
 	int num_rows;	// Number of rows in the character map.
 	int num_cols;	// Number of columns in the character map.
 	char **map;	// A pointer to a static character map.
-	
-	// Default constructor
-	CharMap();
 
 	// Constructor with parameters
-	CharMap(int rows, int cols, char **p_map);
+	CharMap(int rows, int cols, char ** p_map);
 
 	// Copy constructor
 	CharMap(CharMap const &);
