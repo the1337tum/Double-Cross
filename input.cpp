@@ -4,14 +4,11 @@
 
 using namespace std;
 
-int readFile(struct *map, const char *name) {
-    const char* yup;
-    int n;
-    int count = 0;
+int readFile(CharMap *map, const char *file_name) {
     FILE * pFile;
     string line;
-    ifstream myfile ("MAIN.LOAD.txt"); 
-    pFile=fopen(name , "wt");
+    ifstream myfile (file_name); 
+    pFile=fopen(file_name , "wt");
   
     if (myfile.is_open()) {
         while (! myfile.eof()) {
