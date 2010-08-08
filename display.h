@@ -9,6 +9,7 @@ public:
     // Constructors and Destructors
     DisplayIO(int height, int width) : height( height ), width( width ) {
         initscr();              // Start curses mode
+        nodelay(mainwnd, TRUE); // Don't wait for input on getch()
         cbreak();               // Read raw input - except Ctrl-C etc.
         keypad(stdscr, TRUE);   // Get function keys (F1 and arrows)
         noecho();               // Don't echo() for getch
