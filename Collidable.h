@@ -45,3 +45,4 @@ public:
 };
 
 #endif /* COLLIDABLE_H_ */
+

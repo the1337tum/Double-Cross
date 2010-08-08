@@ -1,5 +1,15 @@
 #include <ncurses>
 
+enum KeyPressed {
+    keyEsc,
+    keySpace,
+    keyReturn,
+    keyLeft,
+    keyUp,
+    keyRight,
+    keyDown
+};
+
 class DisplayIO{
 private:
     const int height;   //default: 80
@@ -9,9 +19,9 @@ public:
     // Constructors and Destructors
     DisplayIO(int height, int width) : height( height ), width( width ) {
         initscr();              // Start curses mode
-        nodelay(mainwnd, TRUE); // Don't wait for input on getch()
-        cbreak();               // Read raw input - except Ctrl-C etc.
+        nodelay(stdscr, TRUE);  // Don't wait for input on getch()
         keypad(stdscr, TRUE);   // Get function keys (F1 and arrows)
+        cbreak();               // Read raw input - except Ctrl-C etc.
         noecho();               // Don't echo() for getch
     }
 
@@ -29,5 +39,9 @@ public:
     }
 
     // Console Input
-    
+    keyPressed getKey() {
+        if (ch = getch() != ERR) {
+        
+        }
+    }
 }
