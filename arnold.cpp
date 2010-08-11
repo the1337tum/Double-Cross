@@ -1,4 +1,4 @@
-﻿#include "stdafx.h"
+#include "stdafx.h"
 #include "Keyboard.h"
 #include "CharMap.h"
 #include "Event.h"
