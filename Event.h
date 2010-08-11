@@ -1,3 +1,11 @@
+/**	Header file for Event class
+ *
+ *	TODO Write a brief summary of what an Event object does and is used
+ *	for.
+ */
+
+#ifndef EVENT_H_
+#define EVENT_H_
 #include "mylib.h"
 #include "CharMap.h"
 
@@ -44,3 +52,4 @@ public:
     ~EventRotate(void);
 };
 
+#endif /* EVENT_H_ */

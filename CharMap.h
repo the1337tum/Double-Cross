@@ -1,9 +1,11 @@
-/**
- *  CharMaps are simply maps with positions.
- *  All debug output should be printed to stderr, not printw.
- *  All other official display methods should be printed to the level buffer, 
- *  not display. This done for collision detection and efficency reasons.
-**/
+/**	Header file for CharMap class
+ *
+ *	A CharMap object is simply a map with a position.
+ *	All debug output should be printed to stderr, not printw.
+ *	All other official display methods should be printed to the level
+ *	buffer, not the display. This is done for collision detection and
+ *	efficiency.
+ */
 
 #ifndef CHARMAP_H_
 #define CHARMAP_H_

@@ -1,4 +1,5 @@
 /**	Header file for Collidable class
+ *
  *	A Collidable object is an object which represents something that can
  *	collide with something else when the game is being played. This includes
  *	enemies, the avatar, projectiles (bullets) and static obstacles such as

@@ -1,3 +1,8 @@
+/**	EventQueue
+ *	More detailed documentation can be found in the header file,
+ *	EventQueue.h
+ */
+
 #include "StdAfx.h"
 #include "EventQueue.h"
 #include <windows.h>

@@ -1,4 +1,11 @@
-#pragma once
+/**	Header file for EventQueue class
+ *
+ *	TODO Write a brief summary of what an EventQueue object does and is
+ *	used for.
+ */
+
+#ifndef EVENTQUEUE_H_
+#define EVENTQUEUE_H_
 #include "Event.h"
 
 class EventQueue
@@ -18,3 +25,5 @@ public:
 	void add( Event *new_event );
 	Event *get();
 };
+
+#endif /* EVENTQUEUE_H_ */

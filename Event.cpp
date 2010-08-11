@@ -1,3 +1,7 @@
+/**	Event
+ *	More detailed documentation can be found in the header file, Event.h
+ */
+
 #include "StdAfx.h"
 #include "Event.h"
 #include "mylib.h"

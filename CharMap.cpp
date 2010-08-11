@@ -1,3 +1,8 @@
+/**	CharMap
+ *	More detailed documentation can be found in the header file,
+ *	CharMap.h
+ */
+
 #include <stdio.h>
 #include "CharMap.h"
 
