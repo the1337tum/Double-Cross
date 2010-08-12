@@ -1,13 +1,12 @@
 /**	Test the CharMap object
  *
- *	Passed Tests:
- *
- *	Failed Tests:
+ *	Tests:
  *	1)  Construct a CharMap object with parameters.
+ *		FAIL
  *	2)  Construct a CharMap object from another CharMap object.
+ *		FAIL
  *	3)  Destruct a CharMap object.
- *
- *	Untested Tests:
+ *		FAIL
  *
  */
 
