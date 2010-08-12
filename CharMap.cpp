@@ -11,7 +11,7 @@ CharMap::CharMap( int start_x, int start_y, int rows, int cols, char ***map ) {
     location.start_y = start_y;
     location.rows = rows;
     location.cols = cols;
-    this.map = map;
+    this->map = map;
 }
 
 CharMap::CharMap( CharMap *new_charMap ) : 
