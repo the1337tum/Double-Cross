@@ -35,6 +35,7 @@ public:
     char*** getMap();
     
     // Mutators
+    // TODO Define Direction
     void move(Direction direction);
     void replaceMap( CharMap *replacement );
 };
