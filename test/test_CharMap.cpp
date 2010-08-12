@@ -1,12 +1,22 @@
+/**	Test the CharMap object
+ *
+ *	Passed Tests:
+ *	1)  Construct a CharMap object.
+ *	2)  Destruct a CharMap object.
+ *
+ *	Failed Tests:
+ *
+ *	Untested Tests:
+ *
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
-//#include "input.h"
 #include "CharMap.cpp"
 
 using namespace std;
 
 int main(int argc, char *argv[]) {
-//    return readFile(*argv);
 	char a;
 	char * b;
 	char ** c;
