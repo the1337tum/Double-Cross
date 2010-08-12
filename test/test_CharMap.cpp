@@ -1,11 +1,11 @@
 /**	Test the CharMap object
  *
  *	Passed Tests:
+ *
+ *	Failed Tests:
  *	1)  Construct a CharMap object with parameters.
  *	2)  Construct a CharMap object from another CharMap object.
  *	3)  Destruct a CharMap object.
- *
- *	Failed Tests:
  *
  *	Untested Tests:
  *
@@ -13,7 +13,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "CharMap.cpp"
+#include "../CharMap.cpp"
 
 using namespace std;
 
