@@ -1,23 +1,13 @@
 #include <ncurses>
 
-enum KeyPressed {
-    keyEsc,
-    keySpace,
-    keyReturn,
-    keyLeft,
-    keyUp,
-    keyRight,
-    keyDown
-};
-
-class DisplayIO{
+class Display{
 private:
     const int height;   //default: 80
     const int width;    //default: 40
 
 public:
     // Constructors and Destructors
-    DisplayIO(int height, int width) : height( height ), width( width ) {
+    Display(int height, int width) : height( height ), width( width ) {
         initscr();              // Start curses mode
         nodelay(stdscr, TRUE);  // Don't wait for input on getch()
         keypad(stdscr, TRUE);   // Get function keys (F1 and arrows)
@@ -25,9 +15,9 @@ public:
         noecho();               // Don't echo() for getch
     }
 
-    DisplayIO() : DisplayIO( 80, 40 ) { /* Default Constructor */ }
+    Display() : DisplayIO( 80, 40 ) { /* Default Constructor */ }
 
-    ~DisplayIO() {
+    ~Display() {
         endwin();   // End curses mode
     }
 
@@ -45,4 +35,4 @@ public:
      *      e.g. KEY_DOWN, KEY_UP, KEY_LEFT, KEY_RIGHT,
      *           KEY_EXIT, KEY_SPACE, KEY_RETURN
     **/
-}
+};
