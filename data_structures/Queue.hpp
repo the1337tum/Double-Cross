@@ -19,7 +19,7 @@ public:
 	Queue() {
 		first = NULL;
 		last = NULL;
-		for( int node = 0; node < length; node++ )
+		for (int node = 0; node < length; node++)
 			queue[node].next = &queue[(node + 1) % length];
 	}
 
@@ -31,7 +31,7 @@ public:
 	int isFull() { return last->next == first; }
 
 	void put( ItemType item ) {
-		if (isEmpty()) {
+		if ( isEmpty() ) {
 			first = queue;
 			last = queue;
 			first->data = item;
@@ -46,8 +46,8 @@ public:
 	ItemType get() {
 		QueueNode<ItemType> *result;
 
-		if (isEmpty() ) { return NULL; }
-		if(first == last) {
+		if ( isEmpty() ) { return NULL; }
+		if (first == last) {
 			result = first;
 			last = first = NULL;
 		} else {
@@ -58,6 +58,6 @@ public:
 	}
 
 	ItemType peek() {
-		if(! isEmpty() ) { return first->data; }
+		if (! isEmpty() ) { return first->data; }
 	}
 };
