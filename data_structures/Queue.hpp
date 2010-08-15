@@ -1,5 +1,3 @@
-/*	This quality class was brought to you by Tum. */
-
 /*	A fixed length cyclic queue template. */
 
 template <typename ItemType>
