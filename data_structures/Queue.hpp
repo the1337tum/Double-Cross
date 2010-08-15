@@ -6,15 +6,15 @@ struct QueueNode {
    QueueNode<ItemType> *next;
 };
 
-template <typename ItemType, int size_>
+template <typename ItemType, int size>
 class Queue {
 private:
 	QueueNode<ItemType> *first;
 	QueueNode<ItemType> *last;
-	QueueNode<ItemType> queue[size_];
+	QueueNode<ItemType> queue[size];
 
 public:
-	const int length = size_; // Feels like home :)
+	const int length = size; // Feels like home :)
 	
 	Queue() {
 		first = NULL;
@@ -31,12 +31,11 @@ public:
 	int isFull() { return last->next == first; }
 
 	void put( ItemType item ) {
-		if( isEmpty() )
-		{
+		if (isEmpty()) {
 			first = queue;
 			last = queue;
 			first->data = item;
-		} else if( isFull() ) {
+		} else if (isFull()) {
 			return; 
 		} else {
 			last = last->next;
@@ -47,9 +46,8 @@ public:
 	ItemType get() {
 		QueueNode<ItemType> *result;
 
-		if( isEmpty() ) { return NULL; }
-		if( first == last ) 
-		{
+		if (isEmpty() ) { return NULL; }
+		if(first == last) {
 			result = first;
 			last = first = NULL;
 		} else {
