@@ -16,13 +16,13 @@ CharMap::CharMap( int start_x, int start_y, int rows, int cols, char ***map ) {
 
 // I'm getting an error saying that CharMap is not the superclass of CharMap.
 // Is the constructor supposed to have another constructor inside it?
-CharMap::CharMap( CharMap *new_charMap ) : 
+CharMap::CharMap( CharMap *new_charMap ) {
     CharMap( new_charMap->location.start_x,  
              new_charMap->location.start_y,
              new_charMap->location.rows,
              new_charMap->location.cols, 
              new_charMap->map );
-{ /* Default Constructor */ }
+}
 
 CharMap::~CharMap(void) { /* Nothing to clean up */ }
 
