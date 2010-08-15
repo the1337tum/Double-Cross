@@ -14,7 +14,7 @@ private:
 	QueueNode<ItemType> queue[size];
 
 public:
-	const int length = size; // Feels like home :)
+	const int length = size;
 	
 	Queue() {
 		first = NULL;
