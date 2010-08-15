@@ -7,6 +7,7 @@
 /**
  *  A wrapping fixed length cyclic array of pointers 
  *  Intentionally kept as simple as possible
+ *  Use pointer arithmetic at your own risk!
 **/
 
 using namespace std;
