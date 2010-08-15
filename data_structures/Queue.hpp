@@ -31,7 +31,7 @@ public:
 	int isFull() { return last->next == first; }
 
 	void put( ItemType item ) {
-		if ( isEmpty() ) {
+		if (isEmpty()) {
 			first = queue;
 			last = queue;
 			first->data = item;
@@ -46,7 +46,7 @@ public:
 	ItemType get() {
 		QueueNode<ItemType> *result;
 
-		if ( isEmpty() ) { return NULL; }
+		if (isEmpty()) { return NULL; }
 		if (first == last) {
 			result = first;
 			last = first = NULL;
@@ -58,6 +58,6 @@ public:
 	}
 
 	ItemType peek() {
-		if (! isEmpty() ) { return first->data; }
+		if (!isEmpty()) { return first->data; }
 	}
 };
