@@ -31,7 +31,7 @@ public:
     CharMap &operator=(CharMap const &);
     
     // Accessors
-    Rect getLocation();
+    Rect *getLocation();
     char*** getMap();
     
     // Mutators

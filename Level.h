@@ -9,17 +9,25 @@
 #ifndef LEVEL_H_
 #define LEVEL_H_
 
+#define MAX_OBJECTS 100 // The maximum number of objects in the event queue.
+
 public class Level {
 private:
-    Queue<CharMap ***, MAX_OBJECTS> NPCs;
-    char ***level;  // A pointer to the level.
+    static char **level;
+    Queue<CharMap *, MAX_OBJECTS> NPCs;
+    CyclicArray<char *> window; // The sliding window.
+    Rect location; // The current location of the window
 public:
     Level() {
         System.err.printf("No map provided!");
     }
 
-    Level(char ***level) {
-        this->level = level;
+    Level(CharMap *new_map) {
+        level = new_map.getMap();
+        location = new_map.getLocation();
+        for (int row = 0; row < location->rows; row++) {
+            window[row] = level[row];
+        }
     }
 
     ~Level();

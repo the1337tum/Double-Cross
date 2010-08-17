@@ -1,5 +1,5 @@
-#ifndef __CyclicArray__
-#define __CyclicArray__
+#ifndef CyclicArray_H_
+#define CyclicArray_H_
 
 #include <stdio>
 #include <new>
@@ -20,10 +20,10 @@ private:
 
 public:
     const int length = size;
-
+    
     CyclicArray() { /* All taken care of by the template */ } 
     ~CyclicArray() { /* All memory on the stack */ };
-   
+    
     // Array subscript operator - pointers are mutable
     Type &operator[](const int index) {
         return array[(index + offset) % length];
@@ -34,4 +34,4 @@ public:
     }
 };
 
-#endif /* __CyclicArray__*/
+#endif /* CyclicArray_H_*/
