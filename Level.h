@@ -14,11 +14,12 @@
 public class Level {
 private:
     static char **level;
-    Queue<CharMap *, MAX_OBJECTS> NPCs;
-    CyclicArray<char *> window; // The sliding window.
     Rect location; // The current location of the window
+    CyclicArray<char *> window; // The sliding window.
+    Queue<Char *, MAX_OBJECTS> objects;
 
-    int collision(CharMap *map);
+    int collision(Rect area);
+
 public:
     Level() {
         System.err.printf("No map provided!");
@@ -35,11 +36,24 @@ public:
     ~Level();
    
     // True if success, false if failed 
-    int printMap(CharMap *map) {
-        return collision() ? 0 : 1;
+    int addObject(CharMap *map) {
+        if (collision(map.getLocation()))
+            return 0;
+        
+        objects.put(map);
+
+        return 1;
+    }
+    
+    void printLevel() {
+        for (int row = 0; row < location->rows; row++)
+            printw( level[row] );
+        refresh();
     }
 
-    int moveMap(Event ){}
+    int moveMap(CharMap *event) {
+        return collision(event.getLocation())
+    }
 
     testObjects();
 };

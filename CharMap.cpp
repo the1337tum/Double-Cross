@@ -6,7 +6,9 @@
 #include <stdio.h>
 #include "CharMap.h"
 
-CharMap::CharMap( int start_x, int start_y, int rows, int cols, char ***map ) {
+using namespace CharMap;
+
+CharMap( int start_x, int start_y, int rows, int cols, char ***map ) {
     location.start_x = start_x;
     location.start_y = start_y;
     location.rows = rows;
@@ -16,7 +18,7 @@ CharMap::CharMap( int start_x, int start_y, int rows, int cols, char ***map ) {
 
 // I'm getting an error saying that CharMap is not the superclass of CharMap.
 // Is the constructor supposed to have another constructor inside it?
-CharMap::CharMap( CharMap *new_charMap ) {
+CharMap( CharMap *new_charMap ) {
     CharMap( new_charMap->location.start_x,  
              new_charMap->location.start_y,
              new_charMap->location.rows,
@@ -24,9 +26,9 @@ CharMap::CharMap( CharMap *new_charMap ) {
              new_charMap->map );
 }
 
-CharMap::~CharMap(void) { /* Nothing to clean up */ }
+~CharMap(void) { /* Nothing to clean up */ }
 
-CharMap& CharMap::operator=(CharMap const &c) {
+CharMap& operator=(CharMap const &c) {
     if (&c != this) {
 	location.start_x = c.location.start_x;
 	location.start_y = c.location.start_y;
@@ -36,11 +38,11 @@ CharMap& CharMap::operator=(CharMap const &c) {
     }
 }
 
-Rect CharMap::getLocation() { return location; }
+Rect getLocation() { return location; }
 
 char ***getMap() { return map; }
 
-void CharMap::move( Direction direction ) {
+void move( Direction direction ) {
     switch(direction):
     case up:
         location.start_y++;
@@ -58,7 +60,7 @@ void CharMap::move( Direction direction ) {
         System.err.printf("CharMap::move has gone awry.");
 }
 
-void CharMap::replaceMap( CharMap ***replacement ) {
+void replaceMap( CharMap ***replacement ) {
 	map = replacement;
 }
 

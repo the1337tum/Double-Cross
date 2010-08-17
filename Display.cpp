@@ -16,9 +16,4 @@ Display() : DisplayIO( 80, 40 ) { /* Default Constructor */ }
     endwin();   // End curses mode
 }
 
-void printLevel (char **level ) {
-    for (int row = 0; row < height; row++)
-        printw( level[row] );
-    refresh();
-}
 
