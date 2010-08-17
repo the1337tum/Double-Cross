@@ -31,6 +31,11 @@ public:
     }
 
     ~Level();
+   
+    // True if success, false if failed 
+    int printMap(CharMap *map) {
+        return collision() ? 0 : 1;
+    }
 
     testObjects();
 };
