@@ -17,6 +17,8 @@ private:
     Queue<CharMap *, MAX_OBJECTS> NPCs;
     CyclicArray<char *> window; // The sliding window.
     Rect location; // The current location of the window
+
+    int collision(CharMap *map);
 public:
     Level() {
         System.err.printf("No map provided!");
@@ -36,6 +38,8 @@ public:
     int printMap(CharMap *map) {
         return collision() ? 0 : 1;
     }
+
+    int moveMap(Event ){}
 
     testObjects();
 };
