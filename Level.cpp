@@ -3,6 +3,7 @@
  */
 
 #include "Level.h"
+#include <ncurses>
 
 using namespace Level
 
