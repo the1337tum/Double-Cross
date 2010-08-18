@@ -10,7 +10,7 @@
 #define LEVEL_H_
 
 #include <map>
-#include "Display.h"
+#include <ncurses>
 
 #define MAX_OBJECTS 100 // The maximum number of objects in the event queue.
 // Identifiers (ID) - all other objects are > 2.
