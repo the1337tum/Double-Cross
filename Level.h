@@ -9,51 +9,33 @@
 #ifndef LEVEL_H_
 #define LEVEL_H_
 
+#include <map>
+#include "Display.h"
+
 #define MAX_OBJECTS 100 // The maximum number of objects in the event queue.
+// Identifiers (ID) - all other objects are > 2.
+// NOBODY 0
+// KEYBOARD 1
+// PLAYER 2
 
 public class Level {
 private:
-    static char **level;
-    Rect location; // The current location of the window
-    CyclicArray<char *> window; // The sliding window.
-    Queue<Char *, MAX_OBJECTS> objects;
+    static char **level;        // Char array for the level.
+    Rect location;              // Location of the window.
+    CyclicArray<char *> window; // Sliding display window.
+    map<int, Rect> objects;     // Objects currently on the level: ID -> locaion.
 
-    int collision(Rect area);
+    int collision(int ID, Rect area); // Cannot collide with itself.
 
 public:
-    Level() {
-        System.err.printf("No map provided!");
-    }
-
-    Level(CharMap *new_map) {
-        level = new_map.getMap();
-        location = new_map.getLocation();
-        for (int row = 0; row < location->rows; row++) {
-            window[row] = level[row];
-        }
-    }
-
+    Level();
+    Level(char **map, Rect window_area);
     ~Level();
    
     // True if success, false if failed 
-    int addObject(CharMap *map) {
-        if (collision(map.getLocation()))
-            return 0;
-        
-        objects.put(map);
-
-        return 1;
-    }
-    
-    void printLevel() {
-        for (int row = 0; row < location->rows; row++)
-            printw( level[row] );
-        refresh();
-    }
-
-    int moveMap(CharMap *event) {
-        return collision(event.getLocation())
-    }
+    int addObject(int ID, CharMap *map); 
+    void printLevel();
+    int moveMap(CharMap *event); 
 
     testObjects();
 };
