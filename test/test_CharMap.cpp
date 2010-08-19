@@ -7,6 +7,7 @@
  *		FAIL
  *	3)  Destruct a CharMap object.
  *		FAIL
+ *	4)  Can I edit this file now?
  *
  */
 
