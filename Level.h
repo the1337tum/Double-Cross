@@ -28,7 +28,7 @@ private:
     CyclicArray<char *> window;  // Sliding display window.
     map<int, CharMap *> objects; // Objects currently on the level: ID -> locaion.
 
-    int collision(int ID, Rect area); // Cannot collide with itself.
+    int collision(int ID, CharMap *object); // Cannot collide with itself.
 
 public:
     Level();
@@ -37,7 +37,7 @@ public:
    
     // Accessors
     Rect getLocation(); // The location of the sliding window.
-    map<int, CharMap> *getObjects(); // Pointer to the hashed objects. 
+    map<int, CharMap *> *getObjects(); // Pointer to the hashed objects. 
 
     // Mutators
     int addObject(int ID, CharMap *map); // True if success, false if failed.
