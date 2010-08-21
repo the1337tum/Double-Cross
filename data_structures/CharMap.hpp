@@ -29,7 +29,7 @@ public:
     
     // Operators
     CharMap &operator=(CharMap const &);
-    
+
     // Accessors
     Rect *getLocation();
     char*** getMap();

@@ -19,12 +19,28 @@ const int collision(CharMap *object) {
 }
 
 int inline levelCollision(CharMap *object) {
-    
-    for (int row = object.location->start_x )
+    for (int row = object.location->start_y; row < object.location->rows; row++)
+        for (int col = object.location->start_x; col < object.location->cols; cols++)
+            if(window[row][col] =! ' ')
+                return 1;
+
+    return 0;
 }
 
 int inline objectCollision(CharMap *object) {
-    for ()
+    for (int count = 0; count < objects.length; count++) {
+        if (object == objects[row]) // Objects can't collide with themselves
+            return = 0;
+      
+        Rect location = objects[count].location;
+        if (object.location->start_x > location->start_x + location->cols 
+        || (object.location->start_y > location->start_Y + location->rows) )
+            if (location->start_x > object.location->start_x + object.location->cols 
+            || (location->start_y > object.location->start_Y + object.location->rows) )
+                return object.ID;
+    }
+    
+    return 0;
 }
 
 // Constructors and destructors
