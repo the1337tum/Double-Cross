@@ -16,12 +16,11 @@ const int collision(CharMap *object) {
         return 1;
     }
     return 0;
-
-
 }
 
 int inline levelCollision(CharMap *object) {
-
+    
+    for (int row = object.location->start_x )
 }
 
 int inline objectCollision(CharMap *object) {
@@ -33,12 +32,10 @@ Level() {
     printw("No map provided!\n");
 }
 
-Level(char **map, Rect window_area) {
-    level = map
-    location = window_area;
-    for (int row = location->start_y; row < location->rows; row++) {
-        window[row] = level[row];
-    }
+// Save and load rely on location for replaying
+Level(char **map, Rect location) {
+    for (int row = location->start_y; row < location->rows; row++)
+        window[row] = map[row];
 }
 
 // Accessors
@@ -58,7 +55,7 @@ int addObject(CharMap *object) {
     char *** new_map = map.getMap();
     for (int x = 0; x < new_area->cols; x++) 
         for (int y = 0; y < new_area->rows; y++)
-            level[x + new_area->start_x][y + area->start_y] = new_map*[x][y];
+            window[x + new_area->start_x][y + area->start_y] = new_map*[x][y];
 
     return 1;
 }
@@ -66,7 +63,7 @@ int addObject(CharMap *object) {
 int delObject(CharMap *map) {
     for (int x = 0; x < map.location->cols; x++)
         for (int y = 0; y < map.location->rows; y++)
-            level[x + map.location->start_x][y + map.location->start_y] = ' '; 
+            window[x + map.location->start_x][y + map.location->start_y] = ' '; 
 }
 
 // Interface method
