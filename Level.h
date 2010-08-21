@@ -1,4 +1,5 @@
-/**	Header file for Level class
+/**	Header file for Level class - Map and datastructure abstraction layer. 
+ *      This is the main interface with IO. 
  *
  *	The Level object is responsible for:
  *	1)  Detecting collisions between CharMaps and/or the Level.
@@ -8,6 +9,9 @@
 
 #ifndef LEVEL_H_
 #define LEVEL_H_
+    
+/* This is the same class you'd use for the concurrent version 
+        - just adding an event queue and fork and loop in the constructor. */
 
 #include <map>
 
@@ -31,12 +35,15 @@ public:
     Level(char **map, Rect window_area);
     ~Level();
    
-    // True if success, false if failed 
-    int addObject(int ID, CharMap *map); 
-    void printLevel();
-    int moveMap(CharMap *event); 
+    // Accessors
+    Rect getLocation();
 
-    testObjects();
+    // Mutators
+    int addObject(int ID, CharMap *map); // True if success, false if failed.
+    int moveObject(CharMap *event);      // Moves an object on the map.
+    
+    
+    void printLevel();  // Interfaces with ncurses to print the level.
 };
 
 #endif /* LEVEL_H_ */
