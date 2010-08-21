@@ -59,7 +59,7 @@ Rect getLocation() {
     return location;
 }
 
-map<int, CharMap *> *getObjects() {
+CharMap ***getObjects() {
     return objects;
 }
 
