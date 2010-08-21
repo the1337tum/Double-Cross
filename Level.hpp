@@ -29,6 +29,8 @@ private:
     CharMap[MAX_OBJECTS] objects;   // Array of the objects
 
     int collision(CharMap *object); // Cannot collide with itself.
+    int inline levelCollision(CharMap *object);
+    int inline objectCollision(CharMap *object);
 
 public:
     Level();
