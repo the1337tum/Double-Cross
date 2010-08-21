@@ -1,5 +1,5 @@
-/**	Header file for Level class - Map and datastructure abstraction layer. 
- *      This is the main interface with IO. 
+/**	Header file for Level class
+ *      Abstraction Level:  NCurses <--> Level <--> Events
  *
  *	The Level object is responsible for:
  *	1)  Detecting collisions between CharMaps and/or the Level.
