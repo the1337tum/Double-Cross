@@ -7,7 +7,6 @@
 
 using namespace Level
 
-// Constructors and destructors
 Level() {
     printw("No map provided!\n");
 }
@@ -20,11 +19,6 @@ Level(char **map, Rect window_area) {
     }
 }
 
-// Accessors
-Rect getLocation();
-map<int, Rect> getObjects();
-
-// Mutators
 int addObject(int ID, CharMap *map) {
     Rect new_area = map.getLocation()
     if (collision(ID, new_area))
@@ -43,18 +37,15 @@ int addObject(int ID, CharMap *map) {
 
     return 1;
 }
-    
-int moveMap(CharMap *event) {
-    if (collision(event.getLocation()))
-        return 0;
 
-
-}
-    
-    
 void printLevel() {
     for (int row = 0; row < location->rows; row++)
         printw(level[row]);
     refresh();
     }
 }
+
+int moveMap(CharMap *event) {
+    return collision(event.getLocation())
+}
+

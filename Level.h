@@ -26,7 +26,7 @@ private:
     static char **level;        // Char array for the level.
     Rect location;              // Location of the window.
     CyclicArray<char *> window; // Sliding display window.
-    map<int, Rect> objects;     // Objects currently on the level: ID -> locaion.
+    map<int, CharMap *> objects;     // Objects currently on the level: ID -> locaion.
 
     int collision(int ID, Rect area); // Cannot collide with itself.
 
@@ -36,8 +36,8 @@ public:
     ~Level();
    
     // Accessors
-    Rect getWindowLocation(); 
-    map<int, Rect> getObjects();
+    Rect getLocation();
+    map<int, CharMap> *getMap();
 
     // Mutators
     int addObject(int ID, CharMap *map); // True if success, false if failed.
