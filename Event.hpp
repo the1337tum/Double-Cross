@@ -1,9 +1,5 @@
 /**	Header file for Event class
  *
- *	TODO Write a brief summary of what an Event object does and is used
- *	for.
- *	TODO Split this into event types - event types spawn from this event class.
- *	Make better OO model, for sure!
  */
 
 #ifndef EVENT_H_
@@ -24,7 +20,7 @@ public:
     
     Event(); 
     Event( Event *new_event );
-    ~Event();
+    virtual ~Event();
 
     void trigger() = 0; // Prints to level and triggers new events based on collisions.
     void update(Event *new_event) = 0;  // Merge new events to exsisting event

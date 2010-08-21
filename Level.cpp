@@ -7,6 +7,27 @@
 
 using namespace Level
 
+// Private Collision Method: returns ID of who it collided with - 1 for the map itself.
+const int collision(CharMap *object) {
+    // Calculating object hits to reduce testing area, and double testing.
+    if (levelCollision(CharMap *object)) {
+        if (objectCollision(CharMap *object))
+            return object.ID;
+        return 1;
+    }
+    return 0;
+
+
+}
+
+int inline levelCollision(CharMap *object) {
+
+}
+
+int inline objectCollision(CharMap *object) {
+    for ()
+}
+
 // Constructors and destructors
 Level() {
     printw("No map provided!\n");
@@ -30,17 +51,10 @@ map<int, CharMap *> *getObjects() {
 }
 
 // Mutators
-int addObject(int ID, CharMap *map) {
-    Rect new_area = map.getLocation()
-    if (collision(ID, new_area))
+int addObject(CharMap *object) {
+    if (collision(object))
         return 0;
     
-    // Remove the old object
-    Rect old_area = objects(ID);
-    for (int x = old_area->start_x; x < (old_area->start_x + old_area->cols); x++ ) 
-        for (int y = old_area->start_y; y < (old_area->start_y + old_area->rows); y++)
-            level[x][y] = ' ';
-
     char *** new_map = map.getMap();
     for (int x = 0; x < new_area->cols; x++) 
         for (int y = 0; y < new_area->rows; y++)
@@ -49,8 +63,10 @@ int addObject(int ID, CharMap *map) {
     return 1;
 }
 
-int moveMap(CharMap *object) {
-    return collision(event.object())
+int delObject(CharMap *map) {
+    for (int x = 0; x < map.location->cols; x++)
+        for (int y = 0; y < map.location->rows; y++)
+            level[x + map.location->start_x][y + map.location->start_y] = ' '; 
 }
 
 // Interface method

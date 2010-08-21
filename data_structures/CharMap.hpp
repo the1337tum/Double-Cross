@@ -22,7 +22,7 @@ private:
     Rect location;
     char ***map; // A pointer to a static 2d char array.
 
-public:
+public: 
     CharMap( int start_x, int start_y, int rows, int cols, char ***map );
     CharMap( CharMap *new_charMap ); // Stack variables are copied. Dynamic variables are not.
     virtual ~CharMap(void);
