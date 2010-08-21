@@ -23,10 +23,10 @@
 
 public class Level {
 private:
-    static char **level;        // Char array for the level.
-    Rect location;              // Location of the window.
-    CyclicArray<char *> window; // Sliding display window.
-    map<int, CharMap *> objects;     // Objects currently on the level: ID -> locaion.
+    static char **level;         // Char array for the level.
+    Rect location;               // Location of the window.
+    CyclicArray<char *> window;  // Sliding display window.
+    map<int, CharMap *> objects; // Objects currently on the level: ID -> locaion.
 
     int collision(int ID, Rect area); // Cannot collide with itself.
 
@@ -36,8 +36,8 @@ public:
     ~Level();
    
     // Accessors
-    Rect getLocation();
-    map<int, CharMap> *getMap();
+    Rect getLocation(); // The location of the sliding window.
+    map<int, CharMap> *getObjects(); // Pointer to the hashed objects. 
 
     // Mutators
     int addObject(int ID, CharMap *map); // True if success, false if failed.
