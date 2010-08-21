@@ -27,6 +27,7 @@ private:
     Rect location;                  // Location of the window.
     CyclicArray<char *> window;     // Sliding display window.
     CharMap[MAX_OBJECTS] objects;   // Array of the objects
+    int arrayIndex = 0;
 
     int collision(CharMap *object); // Cannot collide with itself.
     int inline levelCollision(CharMap *object);
@@ -42,8 +43,8 @@ public:
     map<int, CharMap *> *getObjects(); // Pointer to the hashed pointer (**). 
 
     // Mutators
-    int addObject(CharMap *map); // True if success, false if failed.
-    void delObject(CharMap *map);    // Moves an object on the map.
+    int addObject(CharMap const *map); // True if success, false if failed.
+    void delObject(CharMap const *map);    // Moves an object on the map.
     
     void printLevel();  // Interfaces with ncurses to print the level.
 };

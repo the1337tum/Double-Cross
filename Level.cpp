@@ -59,12 +59,12 @@ Rect getLocation() {
     return location;
 }
 
-CharMap ***getObjects() {
+CharMap const ***getObjects() {
     return objects;
 }
 
 // Mutators
-int addObject(CharMap *object) {
+int addObject(CharMap const *object) {
     if (collision(object))
         return 0;
     
@@ -73,13 +73,15 @@ int addObject(CharMap *object) {
         for (int y = 0; y < new_area->rows; y++)
             window[x + new_area->start_x][y + area->start_y] = new_map*[x][y];
 
-    return 1;
+    return ++arrayIndex;
 }
 
-int delObject(CharMap *map) {
+void delObject(CharMap const *map) {
     for (int x = 0; x < map.location->cols; x++)
         for (int y = 0; y < map.location->rows; y++)
-            window[x + map.location->start_x][y + map.location->start_y] = ' '; 
+            window[x + map.location->start_x][y + map.location->start_y] = ' ';
+
+    arrayIndex -= 1;
 }
 
 // Interface method
