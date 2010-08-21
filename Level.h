@@ -36,12 +36,12 @@ public:
     ~Level();
    
     // Accessors
-    Rect getLocation();
+    Rect getWindowLocation(); 
+    map<int, Rect> getObjects();
 
     // Mutators
     int addObject(int ID, CharMap *map); // True if success, false if failed.
     int moveObject(CharMap *event);      // Moves an object on the map.
-    
     
     void printLevel();  // Interfaces with ncurses to print the level.
 };
