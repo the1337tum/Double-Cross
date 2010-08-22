@@ -23,30 +23,35 @@
 
 public class Level {
 private:
-    static char **level;            // Char array for the level.
-    Rect location;                  // Location of the window.
-    CyclicArray<char *> window;     // Sliding display window.
-    CharMap[MAX_OBJECTS] objects;   // Array of the objects
-    int arrayIndex = 0;
+	static char **level;            // Char array for the level.
+	Rect location;                  // Location of the window.
+	CyclicArray<char *> window;     // Sliding display window.
+	CharMap[MAX_OBJECTS] objects;   // Array of the objects
+	int arrayIndex = 0;
 
-    int collision(CharMap *object); // Cannot collide with itself.
-    int inline levelCollision(CharMap *object);
-    int inline objectCollision(CharMap *object);
+	int collision(CharMap *object); // Cannot collide with itself.
+	int inline levelCollision(CharMap *object);
+	int inline objectCollision(CharMap *object);
 
 public:
-    Level();
-    Level(char **map, Rect location);
-    ~Level();
+	// Default constructor
+	Level();
+
+	// Constructor with parameters
+	Level(char **map, Rect location);
+
+	// Destructor
+	virtual ~Level();
      
-    // Accessors
-    Rect getLocation(); // The location of the sliding window.
-    CharMap ***getObjects(); // Pointer (*) to the 2d array (**). 
+	// Accessors
+	Rect getLocation(); // The location of the sliding window.
+	CharMap ***getObjects(); // Pointer (*) to the 2d array (**). 
     
-    // Mutators
-    int addObject(CharMap const *map); // True if success, false if failed.
-    void delObject(CharMap const *map);// Removes an object on the map.
+	// Mutators
+	int addObject(CharMap const *map); // True if success, false if failed.
+	void delObject(CharMap const *map);// Removes an object on the map.
     
-    void printLevel();  // Interfaces with ncurses to print the level.
+	void printLevel();  // Interfaces with ncurses to print the level.
 };
 
 #endif /* LEVEL_H_ */
