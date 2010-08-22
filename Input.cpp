@@ -8,12 +8,13 @@ int readFile(CharMap *map, const char *file_name) {
     FILE * pFile;
     string line;
     ifstream myfile (file_name); 
-    pFile=fopen(file_name , "wt");
-  
+     
     if (myfile.is_open()) {
         while (! myfile.eof()) {
-            getline (myfile,line);
-	    cout << line << endl; 
+            getline(myfile,line);
+            switch (line) {
+            
+            }
         }
         myfile.close();
         return 1; 

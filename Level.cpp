@@ -31,7 +31,7 @@ int inline objectCollision(CharMap *object) {
     for (int count = 0; count < objects.length; count++) {
         if (object == objects[row]) // Objects can't collide with themselves
             return = 0;
-      
+         
         Rect location = objects[count].location;
         if (object.location->start_x > location->start_x + location->cols 
         || (object.location->start_y > location->start_Y + location->rows) )
@@ -72,7 +72,7 @@ int addObject(CharMap const *object) {
     for (int x = 0; x < new_area->cols; x++) 
         for (int y = 0; y < new_area->rows; y++)
             window[x + new_area->start_x][y + area->start_y] = new_map*[x][y];
-
+    
     return ++arrayIndex;
 }
 
@@ -80,7 +80,7 @@ void delObject(CharMap const *map) {
     for (int x = 0; x < map.location->cols; x++)
         for (int y = 0; y < map.location->rows; y++)
             window[x + map.location->start_x][y + map.location->start_y] = ' ';
-
+    
     arrayIndex -= 1;
 }
 

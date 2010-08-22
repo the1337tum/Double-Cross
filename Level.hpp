@@ -35,16 +35,16 @@ private:
 
 public:
     Level();
-    Level(char **map, Rect window_area);
+    Level(char **map, Rect location);
     ~Level();
-   
+     
     // Accessors
     Rect getLocation(); // The location of the sliding window.
-    map<int, CharMap *> *getObjects(); // Pointer to the hashed pointer (**). 
-
+    CharMap ***getObjects(); // Pointer (*) to the 2d array (**). 
+    
     // Mutators
     int addObject(CharMap const *map); // True if success, false if failed.
-    void delObject(CharMap const *map);    // Moves an object on the map.
+    void delObject(CharMap const *map);// Removes an object on the map.
     
     void printLevel();  // Interfaces with ncurses to print the level.
 };
