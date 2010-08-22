@@ -1,5 +1,3 @@
-
-
 class BSTNode {
 private:
     int value;
@@ -13,10 +11,16 @@ public:
         left = NULL;
         right = NULL;
     }
+    ~BSTNode() { /* No heap memory */ }
 
+    // Accessors
     bool search(int value);
+    int getValue();
+    BSTNode *getLeft();
+    BSTNode *getRight();
+    
+    // Mutators
     bool add(int value);
-    BSTNode *getValue();
     BSTNode *remove(int value, BSTNode *parent);
 };
  

@@ -57,6 +57,10 @@ bool BSTNode::search(int value) {
     return false;
 }
  
+int BSTNode::getValue() { return value; }
+BSTNode *BSTNode::getLeft() { return left; }
+BSTNode *BSTNode::getRight() { return right; }
+
 bool BSTNode::add(int value) {
     if (value == this->value)
         return false;
