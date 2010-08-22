@@ -17,7 +17,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "../data_structures/Person.cpp"
+#include "../AI/data_structures/Person.cpp"
 
 using namespace std;
 

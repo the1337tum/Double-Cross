@@ -17,7 +17,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "../data_structures/Enemy.cpp"
+#include "../AI/data_structures/Enemy.cpp"
 
 using namespace std;
 

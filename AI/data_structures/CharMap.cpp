@@ -17,13 +17,13 @@ CharMap::CharMap( int start_x, int start_y, int cols, int rows, char ***map ) {
 }
 
 // Copy constructor
-CharMap::CharMap(CharMap const &c) {
+CharMap::CharMap(const CharMap &c) {
 	location.start_x = c.location.start_x;
 	location.start_y = c.location.start_y;
 	location.cols = c.location.cols;
 	location.rows = c.location.rows;
 	this->map = c.map;
-	printf("Deep copying CharMap object.\n");	// debug
+	printf("Copy constructing CharMap object.\n");	// debug
 }
 
 CharMap::~CharMap() { 
@@ -32,13 +32,20 @@ CharMap::~CharMap() {
 
 CharMap& CharMap::operator=(CharMap const &c) {
 	if (&c != this) {
+		// Allocate new memory
+		char *** new_map = c.map;
+
+		// Deallocate old memory
+		delete map;
+
+		// Assign the new memory to the object
 		location.start_x = c.location.start_x;
 		location.start_y = c.location.start_y;
 		location.cols = c.location.cols;
 		location.rows = c.location.rows;
-		map = c.map;
+		map = new_map;
 	}
-	printf("Shallow copying CharMap object.\n");	// debug
+	printf("Assignment copying CharMap object.\n");	// debug
 	return *this; // For assignment chaining.
 }
 

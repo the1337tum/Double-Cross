@@ -5,9 +5,9 @@
 
 #ifndef MOVABLE_H_
 #define MOVABLE_H_
-#include "Collidable.hpp"
+#include "CharMap.hpp"
 
-class Movable: public Collidable
+class Movable: public CharMap
 {
 public:
 	// Constructor with parameters
@@ -21,9 +21,6 @@ public:
 
 	// Destructor
 	virtual ~Movable();
-
-	// move(Direction)
-	virtual int move(Direction direction);
 };
 
 #endif /* MOVABLE_H_ */

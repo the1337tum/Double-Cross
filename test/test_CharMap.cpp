@@ -15,7 +15,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "../data_structures/CharMap.cpp"
+#include "../AI/data_structures/CharMap.cpp"
 
 using namespace std;
 
@@ -25,51 +25,55 @@ int main() {
 	 *	Construct a CharMap object with three parameters.
 	 */
 
-	char c1;
-	char * c2;
-	char ** c3;
-	c1 = 'x';
-	c2 = &c1;
-	c3 = &c2;
+	char char1;
+	char * char2;
+	char ** char3;
+	char1 = 'x';
+	char2 = &char1;
+	char3 = &char2;
 
-	int m1_x = 0;
-	int m1_y = 0;
-	int m1_cols = 1;
-	int m1_rows = 1;
+	int charmap1_x = 0;
+	int charmap1_y = 0;
+	int charmap1_cols = 1;
+	int charmap1_rows = 1;
 
-	CharMap * m1 = new CharMap(m1_x, m1_y, m1_cols, m1_rows, &c3);
+	CharMap * charmap1 = new CharMap(charmap1_x, charmap1_y, charmap1_cols,
+		charmap1_rows, &char3);
 
 	/**	Test 2
 	 *	Deep copy a CharMap object from another CharMap object.
 	 */
 
-	CharMap * m2 = new CharMap(*m1);
+	CharMap * charmap2 = new CharMap(*charmap1);
 
-	/**	Test 3
-	 *	Destruct a CharMap object.
+	/**	Test
+	 *	Assignment by copy assignment operator
 	 */
 
-	delete m2;
-
-	/**	Test 4
-	 *	Shallow copy a CharMap object from another CharMap object.
-	 */
-
-	//CharMap * m1_copy = m1;
+	CharMap * charmap1_copy = charmap1;
 
 	/**	Test 5
 	 *	Read state from a CharMap object.
 	 */
 
-	Rect * location = (*m1).getLocation();
+	Rect * location = (*charmap1).getLocation();
 	printf("%d\n", (*location).start_x);
 	printf("%d\n", (*location).start_y);
 	printf("%d\n", (*location).cols);
 	printf("%d\n", (*location).rows);
 
-	char *** map = (*m1).getMap();
+	char *** charmap1_map = (*charmap1).getMap();
 
-	delete m1;
+	printf("\nTesting constructors:\n");
+	printf("&charmap1: %p\n", &charmap1);
+	printf("&charmap1_copy: %p\n", &charmap1_copy);
+	printf("&charmap2: %p\n", &charmap2);
+	printf("&(*charmap1): %p\n", charmap1);
+	printf("&(*charmap1_copy): %p\n", charmap1_copy);
+	printf("&(*charmap2): %p\n\n", charmap2);
+
+	delete charmap2;
+	delete charmap1;
 
 	return 0;
 }

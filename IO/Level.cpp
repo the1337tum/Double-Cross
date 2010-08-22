@@ -6,11 +6,11 @@
 #include <ncurses.h>
 
 // Private Collision Method: returns ID of who it collided with - 1 for the map itself.
-const int Level::collision(CharMap *object) {
+int Level::collision(CharMap *object) {
     // Calculating object hits to reduce testing area, and double testing.
-    if (levelCollision(CharMap *object)) {
-        if (objectCollision(CharMap *object))
-            return object.ID;
+    if (levelCollision(object)) {
+        if (objectCollision(object))
+            return (*object).ID;
         return 1;
     }
     return 0;
