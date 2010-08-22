@@ -1,7 +1,5 @@
-#include "Keyboard.h"
 #include "CharMap.h"
 #include "Event.h"
-#include <windows.h>
 
 //extern const Rect dimensions {} 
 
