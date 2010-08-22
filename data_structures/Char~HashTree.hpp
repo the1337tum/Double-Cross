@@ -11,13 +11,25 @@
 #include "BST.h"
 #include "hashFunction.h"
 
-class String~Hash-Tree {
-private:
-    BinarySearchTree();    
 
+struct fileNames{
+    char *config = "Config.txt";
+    /**
+     * Can you give me some more examples, 
+     * alturnatively, just add the names of all 
+     * like the example above.
+    **/
+};
+
+class String~HashTree {
+private:
+    BinarySearchTree tree;
+    static const fileNames = new fileNames();
+
+public:
     addString(char *);
     delString(char *);
 
     
 
-}
+};
