@@ -23,9 +23,9 @@ struct fileNames{
 
 class String~HashTree {
 private:
+    static const fileNames hashStrings = new fileNames();
     BinarySearchTree tree;
-    static const fileNames = new fileNames();
-
+    
 public:
     addString(char *);
     delString(char *);
