@@ -38,9 +38,8 @@ public:
         delete tree;
     }
 
-    // Accessors
-    /* Uses both pointer and string comparison. *
-     * Returns the hashed value of the string.  */
+    /* Uses both pointer and string comparison *
+     * Returns the hashed value of the string  */
     int search(char *);
 
     // Mutators
