@@ -21,20 +21,29 @@ extern static struct FileNames{
     **/
 }FILE_NAMES;
 
+/**
+ * Just treat this like any other datastructure
+ *
+**/
 class String~HashTree {
 private:
-    BinarySearchTree tree;
+    BinarySearchTree tree
     
 public:
-    String~HashTree {
-
+    // Constructors and destructors
+    String~HashTree() { 
+        tree = new BinarySearchTree(); 
+    }
+    ~String~HashTree {
+        delete tree;
     }
 
+    // Accessors
+    /* Uses both pointer and string comparison. *
+     * Returns the hashed value of the string.  */
+    int search(char *);
 
     // Mutators
     addString(char *);
     delString(char *);
-
-    
-
 };
