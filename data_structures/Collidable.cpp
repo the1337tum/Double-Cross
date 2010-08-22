@@ -1,48 +1,67 @@
-/**	Collidable
+/**	CharMap
  *	More detailed documentation can be found in the header file,
- *	Collidable.h
+ *	CharMap.h
  */
 
 #include <stdio.h>
-#include "Collidable.hpp"
-#include "CharMap.cpp"
+#include "CharMap.hpp"
 
 // Constructor with parameters
-Collidable::Collidable(int p_x, int p_y, int rows, int cols, char ***p_map)
-//	x(p_x), y(p_y), num_rows(rows), num_cols(cols), map(p_map) { }
-{
-	map = new CharMap(p_x, p_y, rows, cols, p_map);
-	printf("Constructing Collidable object.\n"); // debug
+CharMap::CharMap( int start_x, int start_y, int cols, int rows, char ***map ) {
+	location.start_x = start_x;
+	location.start_y = start_y;
+	location.cols = cols;
+	location.rows = rows;
+	this->map = map;
+	printf("Constructing CharMap object.\n");	// debug
 }
 
 // Copy constructor
-Collidable::Collidable(Collidable const &c)
-//	x(c.x), y(c.y), num_rows(c.num_rows), num_cols(c.num_cols), map(c.map)
-{
-	printf("Deep copying Collidable object.\n"); // debug
+CharMap::CharMap(CharMap const &c) {
+	printf("INCOMPLETE\n");				// debug
+	printf("Deep copying CharMap object.\n");	// debug
 }
 
-// Assignment operator
-Collidable& Collidable::operator=(Collidable const &c)
-{
-	if (&c != this)
-	{
+CharMap::~CharMap() { 
+	printf("Destructing CharMap object.\n");	// debug
+}
+
+CharMap& CharMap::operator=(CharMap const &c) {
+	if (&c != this) {
+		location.start_x = c.location.start_x;
+		location.start_y = c.location.start_y;
+		location.cols = c.location.cols;
+		location.rows = c.location.rows;
 		map = c.map;
 	}
-	printf("Shallow copying Collidable object.\n"); // debug
-	return *this;
+	printf("Shallow copying CharMap object.\n");	// debug
+	return *this; // For assignment chaining.
 }
 
-// Destructor
-Collidable::~Collidable() {
-	delete map;
-	printf("Destructing Collidable object.\n"); // debug
+Rect * CharMap::getLocation() { return &(this->location); }
+
+char *** CharMap::getMap() { return this->map; }
+
+void CharMap::move(Direction direction) {
+	switch (direction) {
+		case UP:
+			location.start_y++;
+			break;
+		case RIGHT:
+			location.start_x++;
+			break;
+		case DOWN:
+			location.start_y--;
+			break;
+		case LEFT:
+			location.start_x--;
+			break;
+		default:
+			perror("Error: Illegal CharMap::move move.");
+	}
 }
 
-// draw()
-//int Collidable::draw() {
-//	return 0;
-//}
+void CharMap::replaceMap(CharMap *replacement) {
+	map = (*replacement).map;
+}
 
-// collide(Collidable * c1)
-//int collide(Collidable * c1) { }

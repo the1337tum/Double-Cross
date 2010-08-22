@@ -12,21 +12,26 @@
 #include "hashFunction.h"
 
 
-struct fileNames{
+extern static struct FileNames{
     char *config = "Config.txt";
     /**
      * Can you give me some more examples, 
      * alturnatively, just add the names of all 
      * like the example above.
     **/
-};
+}FILE_NAMES;
 
 class String~HashTree {
 private:
-    static const fileNames hashStrings = new fileNames();
     BinarySearchTree tree;
     
 public:
+    String~HashTree {
+
+    }
+
+
+    // Mutators
     addString(char *);
     delString(char *);
 

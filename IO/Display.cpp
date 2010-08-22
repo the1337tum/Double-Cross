@@ -16,4 +16,3 @@ Display() : height(80), width(40) { /* Default Constructor */ }
     endwin();   // End curses mode
 }
 
-

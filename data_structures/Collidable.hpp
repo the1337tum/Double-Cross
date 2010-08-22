@@ -1,46 +1,49 @@
-/**	Header file for Collidable class
+/**	Header file for CharMap class
  *
- *	A Collidable object is an object which represents something that can
- *	collide with something else when the game is being played. This includes
- *	enemies, the avatar, projectiles (bullets) and static obstacles such as
- *	walls and pits. When one Collidable object collides with another
- *	Collidable object, particular reactions occur depending on what kinds of
- *	objects collide. Therefore, the Collidable class will act solely as an
- *	abstract superclass which contains collision and draw functionality
- *	which is inherited by the subclass objects such as Enemy and Obstacle.
+ *	A CharMap object is simply a map with a position.
+ *	All debug output should be printed to stderr, not printw.
+ *	All other official display methods should be printed to the level
+ *	buffer, not the display. This is done for collision detection and
+ *	efficiency.
  */
 
-#ifndef COLLIDABLE_H_
-#define COLLIDABLE_H_
-#include "CharMap.hpp"
+#ifndef CHARMAP_H_
+#define CHARMAP_H_
 
-class Collidable
-{
-public:
-	CharMap * map;
-
-	// Constructor with parameters
-	Collidable(int p_x, int p_y, int rows, int cols, char ***p_map);
-
-	// Copy constructor
-	Collidable(Collidable const &);
-
-	// Assignment operator
-	Collidable & operator=(Collidable const &);
-
-	// Destructor
-	virtual ~Collidable();
-
-	// draw()
-	// Tells the Level object to draw this Collidable object onto the next
-	// frame.
-//	virtual int draw();
-
-	// collide(Collidable c1)
-	// Determines what happens when this Collidable object collides into
-	// another Collidable object. (Explosions, hopefully!)
-//	virtual int collide(Collidable * c1);
+struct Rect {
+	int start_x; 
+	int start_y;
+	int cols;   //end_x = start_x + cols 
+	int rows;   //end_y = start_y + rows 
 };
 
-#endif /* COLLIDABLE_H_ */
+enum Direction { UP, DOWN, LEFT, RIGHT };
 
+class CharMap {
+private:
+	Rect location;
+	char ***map; // A pointer to a static 2d char array.
+
+public:
+	// Constructor with parameters
+	CharMap( int start_x, int start_y, int cols, int rows, char ***map );
+
+	// Copy constructor
+	CharMap( CharMap const &);
+
+	// Assignment operator
+	CharMap & operator=(CharMap const &);
+
+	// Destructor
+	virtual ~CharMap(void);
+    
+	// Accessors
+	Rect * getLocation();
+	char *** getMap();
+    
+	// Mutators
+	void move(Direction direction);
+	void replaceMap( CharMap *replacement );
+};
+
+#endif /* CHARMAP_H_ */
