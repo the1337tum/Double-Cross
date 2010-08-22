@@ -4,12 +4,12 @@
 #include <new>
 
 /**
- *  A wrapping fixed length cyclic array of pointers 
- *  Intentionally kept as simple as possible
- *  Use pointer arithmetic at your own risk!
+ * A wrapping fixed length cyclic array of pointers
+ * Intentionally kept as simple as possible
+ * Use pointer arithmetic at your own risk!
 **/
 template <typename ItemType, int size>
-class CyclicArray { 
+class CyclicArray {
 private:
     ItemType array[size];
     int offset = 0;
@@ -32,3 +32,4 @@ public:
 };
 
 #endif /* CyclicArray_H_*/
+
