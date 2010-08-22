@@ -1,3 +1,10 @@
+/**
+ * A simple Binary Search Tree (BST).
+ * No fancy rotations, so worst case is O(n); not O(log n)
+ * like you might expect from an RBT. But have a lower cost 
+ * for insertions and deletions, so useful for smaller datasets.
+**/
+
 class BSTNode {
 private:
     int value;

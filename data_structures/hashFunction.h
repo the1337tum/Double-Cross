@@ -13,7 +13,11 @@
                        +(uint32_t)(((const uint8_t *)(d))[0]) )
 #endif
 
-uint32_t SuperFastHash (const char * data, int len) {
+/**
+ * Used for hashing to an integer for switch statements
+**/
+
+uint32_t stringHash (const char * data, int len) {
     uint32_t hash = len, tmp;
     int rem;
 
