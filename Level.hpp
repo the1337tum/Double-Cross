@@ -14,6 +14,7 @@
         - just adding an event queue and fork and loop in the constructor. */
 
 #include <map>
+#include "data_structures/CharMap.hpp"
 
 #define MAX_OBJECTS 100 // The maximum number of objects in the event queue.
 // Identifiers (ID) - all other objects are > 2.
@@ -21,13 +22,14 @@
 // KEYBOARD 1
 // PLAYER 2
 
-public class Level {
+class Level {
 private:
 	static char **level;            // Char array for the level.
 	Rect location;                  // Location of the window.
-	CyclicArray<char *> window;     // Sliding display window.
-	CharMap[MAX_OBJECTS] objects;   // Array of the objects
-	int arrayIndex = 0;
+	// TODO Implement CyclicArray<E>
+//	CyclicArray<char *> window;     // Sliding display window.
+	CharMap objects [MAX_OBJECTS];   // Array of the objects
+	int arrayIndex; // TODO Initialise arrayIndex
 
 	int collision(CharMap *object); // Cannot collide with itself.
 	int inline levelCollision(CharMap *object);
