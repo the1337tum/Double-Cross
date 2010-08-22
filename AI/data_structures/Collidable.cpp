@@ -18,8 +18,11 @@ CharMap::CharMap( int start_x, int start_y, int cols, int rows, char ***map ) {
 
 // Copy constructor
 CharMap::CharMap(CharMap const &c) {
-	printf("INCOMPLETE\n");				// debug
-	printf("Deep copying CharMap object.\n");	// debug
+    CharMap(c.location.start_x,
+	    c.location.start_y,
+	    c.location.cols,
+	    c.location.rows);
+    printf("Deep copying CharMap object.\n");	// debug
 }
 
 CharMap::~CharMap() { 
