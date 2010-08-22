@@ -3,12 +3,10 @@
  */
 
 #include "Level.hpp"
-#include <ncurses>
-
-using namespace Level
+#include <ncurses.h>
 
 // Private Collision Method: returns ID of who it collided with - 1 for the map itself.
-const int collision(CharMap *object) {
+const int Level::collision(CharMap *object) {
     // Calculating object hits to reduce testing area, and double testing.
     if (levelCollision(CharMap *object)) {
         if (objectCollision(CharMap *object))
@@ -18,7 +16,7 @@ const int collision(CharMap *object) {
     return 0;
 }
 
-int inline levelCollision(CharMap *object) {
+int inline Level::levelCollision(CharMap *object) {
     for (int row = object.location->start_y; row < object.location->rows; row++)
         for (int col = object.location->start_x; col < object.location->cols; cols++)
             if(window[row][col] =! ' ')
@@ -27,7 +25,7 @@ int inline levelCollision(CharMap *object) {
     return 0;
 }
 
-int inline objectCollision(CharMap *object) {
+int inline Level::objectCollision(CharMap *object) {
     for (int count = 0; count < objects.length; count++) {
         if (object == objects[row]) // Objects can't collide with themselves
             return = 0;
@@ -44,27 +42,27 @@ int inline objectCollision(CharMap *object) {
 }
 
 // Constructors and destructors
-Level() {
+Level::Level() {
     printw("No map provided!\n");
 }
 
 // Save and load rely on location for replaying
-Level(char **map, Rect location) {
+Level::Level(char **map, Rect location) {
     for (int row = location->start_y; row < location->rows; row++)
         window[row] = map[row];
 }
 
 // Accessors
-Rect getLocation() {
+Rect Level::getLocation() {
     return location;
 }
 
-CharMap const ***getObjects() {
+CharMap const *** Level::getObjects() {
     return objects;
 }
 
 // Mutators
-int addObject(CharMap const *object) {
+int Level::addObject(CharMap const *object) {
     if (collision(object))
         return 0;
     
@@ -76,7 +74,7 @@ int addObject(CharMap const *object) {
     return ++arrayIndex;
 }
 
-void delObject(CharMap const *map) {
+void Level::delObject(CharMap const *map) {
     for (int x = 0; x < map.location->cols; x++)
         for (int y = 0; y < map.location->rows; y++)
             window[x + map.location->start_x][y + map.location->start_y] = ' ';
@@ -85,7 +83,7 @@ void delObject(CharMap const *map) {
 }
 
 // Interface method
-void printLevel() {
+void Level::printLevel() {
     for (int row = 0; row < location->rows; row++)
         printw(level[row]);
     refresh();
