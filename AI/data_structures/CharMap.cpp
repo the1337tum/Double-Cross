@@ -53,6 +53,8 @@ Rect * CharMap::getLocation() { return &(this->location); }
 
 char *** CharMap::getMap() { return this->map; }
 
+int CharMap::getID() { return this->ID; }
+
 void CharMap::move(Direction direction) {
 	switch (direction) {
 		case UP:
@@ -75,4 +77,3 @@ void CharMap::move(Direction direction) {
 void CharMap::replaceMap(CharMap *replacement) {
 	map = (*replacement).map;
 }
-

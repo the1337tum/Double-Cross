@@ -26,8 +26,8 @@ class Level {
 private:
 	static char **level;            // Char array for the level.
 	Rect location;                  // Location of the window.
-	// TODO Implement CyclicArray<E>
-//	CyclicArray<char *> window;     // Sliding display window.
+	// TODO Implement CyclicArray<char *>
+	CyclicArray<char *> window;     // Sliding display window.
 	CharMap objects [MAX_OBJECTS];   // Array of the objects
 	int arrayIndex; // TODO Initialise arrayIndex
 
