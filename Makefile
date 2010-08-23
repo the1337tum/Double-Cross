@@ -6,18 +6,15 @@
 # Explicitly use g++
 CC=g++
 
-# Compilation flags
-#flags for libraries copied to a local subdirectory
-#CFLAGS = -Ilib/glibmm-2.4/include -Iinclude/glib-2.0 -Ilib/glib-2.0/include
-
-# More compilation flags, for warnings and errors
+# Flags for warnings and errors
 WFLAGS=-W -Werror -ansi -pedantic
 
 # Libraries
 # Both static and dynamically linked libraries
 LIBS=-lncurses
 
-make_objs = IO.o AI.o
+# Add AI.o later..
+make_objs = IO.o
 
 load: $(make_objs)
     $(CC) -o $(make_objs) \
@@ -58,4 +55,4 @@ level.o: $(level)
 
 
 clean: 
-    rm -f load FlockingP.o SimParameterSet.o Loader.o ExampleLoad.o
+    rm -f $(make_objs) $(io_objs)
