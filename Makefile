@@ -32,7 +32,7 @@ IO.o: $(io_objs)
 ifneq (,$(findstring t,$(MAKEFLAGS)))
     display= IO/Display.cpp test/test_Display.cpp
     event=   IO/Event.cpp   test/test_Event.cpp
-    level=   IO/Level.cpp   test/test_Level.cpp
+    level=   IO/Level.cpp   test/test_Level.cpp Library/SLL.hpp
 else
     display= IO/Display.cpp 
     event=   IO/Event.cpp 

@@ -13,7 +13,6 @@
 /* This is the same class you'd use for the concurrent version 
         - just adding an event queue and fork and loop in the constructor. */
 
-#include <map>
 #include "../Library/SLL.hpp"
 #include "data_structures/CharMap.hpp"
 #include "data_structures/CyclicArray.hpp"

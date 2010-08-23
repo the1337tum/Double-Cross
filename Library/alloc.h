@@ -1,5 +1,5 @@
-#include <cstdlib.h>
-#include <cstdio.h>
+#include <cstdlib>
+#include <cstdio>
 #include <ctype.h>
 
 void *emalloc(size_t size) {
