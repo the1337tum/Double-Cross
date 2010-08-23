@@ -43,26 +43,14 @@ public:
     // Accessors     
     int isEmpty() { return first == NULL; }
     
-    const PrimeNode *search(int hash) {
+    int search(int hash) {
         for (PrimeNode *current = first; current != NULL; current = current.next)
             if (hash == this->hash)
                 return 1;
         return 0;
     }
-   
-    // Mutators 
-    void put(int hash, char *string) {
-        if (isEmpty()) {
-            first = queue;
-            last = queue;
-            first = new PrimeNode(hash, string);
-        } else {
-            last->next = new PrimeNode(hash, string);
-            last = last->next;         
-        }
-    }
     
-    const PrimeNode *get(int hash) {
+    const PrimeNode *getNode(int hash) {
         if (isEmpty())
             return NULL;
             
@@ -71,6 +59,18 @@ public:
                 return current;
 
         return NULL;
+    }
+   
+    // Mutators 
+    void add(int hash, char *string) {
+        if (isEmpty()) {
+            first = queue;
+            last = queue;
+            first = new PrimeNode(hash, string);
+        } else {
+            last->next = new PrimeNode(hash, string);
+            last = last->next;         
+        }
     }
 
     void del(PrimeNode *del) {
@@ -137,15 +137,28 @@ public:
     // Accessors
     int isEmpty() { return first == NULL; }
 
-    PrimeNode *search(char *string) {
+    int (*search) (char *) = &getHash;  // Alias to getHash
+    
+    int getHash(char *string) {
         for (SubNode *current = first; current != NULL; current = current.next)
             if (strcmp(string, current->string))
-                return 1;
+                return current.hash;
         return 0;
     }
     
+    const PrimeNode *getNode(int hash) {
+        if (isEmpty())
+            return NULL;
+            
+        for (PrimeNode *current = first; current != NULL; current = current.next)
+            if (hash == this->hash)
+                return current;
+
+        return NULL;
+    }
+
     // Mutators
-    int put(char *string) {
+    int add(char *string) {
         if(search(string))
             return 0;
         if (isEmpty()) {
@@ -159,16 +172,6 @@ public:
         return 1;
     }
 
-    const PrimeNode *get(int hash) {
-        if (isEmpty())
-            return NULL;
-            
-        for (PrimeNode *current = first; current != NULL; current = current.next)
-            if (hash == this->hash)
-                return current;
-
-        return NULL;
-    }
 
     void del(PrimeNode *del) {
         PrimeNode *prev;
