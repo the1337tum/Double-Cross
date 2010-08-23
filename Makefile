@@ -14,17 +14,44 @@ WFLAGS=-W -Werror -ansi -pedantic
 # Also using local subdirectories here
 LIBS=-lncurses
 
-load: IO.o AI.o Files.o test.o
-    $(CC) -o load IO.o AI.o Files.o test.o \
+
+
+make_objs = IO.o AI.o
+
+load: $(make_objs)
+    $(CC) -o $(make_objs) \
     $(CFLAGS) $(LIBS) $(WFLAGS)
-IO.o: FlockingP.cpp
-    $(CC) $(WFLAGS) -c FlockingP.cpp
-SimParameterSet.o: SimParameterSet.cpp
-    $(CC) $(WFLAGS) -c SimParameterSet.cpp
-Loader.o: Loader.cpp    
-    $(CC) $(WFLAGS) $(CFLAGS) -c Loader.cpp
-ExampleLoad.o: ExampleLoad.cpp
-    $(CC) $(WFLAGS) -c ExampleLoad.cpp
+
+# IO files
+io_objs = level.o display.o event.o
+IO.o: $(io_objs)
+ifeq ($(test), true)
+    $(CC) -o $(io_objs) \
+    $(CFLAGS) $(LIBS) $(WFLAGS)
+else
+endif
+
+level.o: Level.cpp
+ifeq ($(test), true)
+    $(CC) $(WFLAGS) -c Level.cpp
+else
+endif
+
+display.o: Display.cpp
+ifeq ($(test), true)
+    $(CC) $(WFLAGS) -c Display.cpp
+else
+endif
+
+event.o: Event.cpp
+ifeq ($(test), true)
+    $(CC) $(WFLAGS) -c Event.cpp
+else
+endif
+
+# AI files
+# AI.o:
+
 
 clean: 
     rm -f load FlockingP.o SimParameterSet.o Loader.o ExampleLoad.o
