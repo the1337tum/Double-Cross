@@ -12,21 +12,21 @@ template <typename ItemType, int size>
 class CyclicArray {
 private:
     ItemType array[size];
-    int offset = 0;
+    int offset;
 
 public:
-    const int length = size;
+    const int length;
     
-    CyclicArray();
+    CyclicArray() : length(size) { offset = 0; }
     ~CyclicArray();
     
     // Array subscript operator - pointers are mutable.
-    Type &operator[](const int index) {
+    ItemType &operator[](const int index) {
         return array[(index + offset) % length];
     }
 
     // Cycle the array index up and down.
-    cycleArray(int step) {
+    void cycleArray(int step) {
         offset = (offset + step) % length;
     }
 };
