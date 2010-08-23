@@ -49,7 +49,7 @@ CharMap& CharMap::operator=(CharMap const &c) {
 	return *this; // For assignment chaining.
 }
 
-Rect * CharMap::getLocation() { return &(this->location); }
+Rect *CharMap::getLocation() { return &(this->location); }
 
 char *** CharMap::getMap() { return this->map; }
 

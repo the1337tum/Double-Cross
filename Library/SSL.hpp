@@ -1,8 +1,8 @@
 /**
- * This is a two dimensional queue, that has been modified
+ * This is a two dimensional SLL, that has been modified
  * to store:
  *      PrimeNode  -  int hash;
- *      SubNode    -  char *string;
+ *      Node       -  char *string;
 **/
 #include <new.h>
 #include <string.h>
@@ -99,9 +99,9 @@ public:
 };
 
 // The queue node to store the string to the hash.
-struct SubNode {
+struct Node {
    char *string;
-   SubNode *next;
+   Node *next;
 
     // optional constructor and destructor
     node(char *copy, SubNode *next) {
@@ -113,19 +113,19 @@ struct SubNode {
 };
 
 // The inner HashQueue
-class SubSLL {
+class SLL {
 private:
-    SubNode *first;
-    SubNode *last;
+    Node *first;
+    Node *last;
 
 public:
     // Constructor and Destructors
-    SubSLL() {
+    SLL() {
         first = NULL;
         last = NULL;
     }
 
-    ~SubSLL() {
+    ~SLL() {
         SubNode *current = first;
         while(current != NULL) {
             SubNode *next = current.next;
@@ -146,7 +146,7 @@ public:
         return 0;
     }
     
-    const PrimeNode *getNode(int hash) {
+    const SubNode *getNode(int hash) {
         if (isEmpty())
             return NULL;
             
@@ -164,18 +164,18 @@ public:
         if (isEmpty()) {
             first = queue;
             last = queue;
-            first = new SubNode(string);
+            first = new Node(string);
         } else {
-            last->next = new SubNode(string);
+            last->next = new Node(string);
             last = last->next;         
         }
         return 1;
     }
 
 
-    void del(PrimeNode *del) {
-        PrimeNode *prev;
-        for (PrimeNode *current = first; current != NULL; current = current.next)
+    void del(Node *del) {
+        Node *prev;
+        for (Node *current = first; current != NULL; current = current.next)
             if (current == del)
                 if (first == last){                 // Only one node
                     first = last = NULL;

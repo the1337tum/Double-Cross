@@ -14,40 +14,40 @@ WFLAGS=-W -Werror -ansi -pedantic
 LIBS=-lncurses
 
 # Add AI.o later..
-make_objs = IO.o
+make_objs= IO.o
 
 load: $(make_objs)
-    $(CC) -o $(make_objs) \
-    $(CFLAGS) $(LIBS) $(WFLAGS)
+	$(CC) -o $(make_objs) \
+	$(CFLAGS) $(LIBS) $(WFLAGS)
 
 ######################################################
 # IO files
 io_objs = level.o display.o event.o
 
 IO.o: $(io_objs)
-    $(CC) -o $(io_objs) \
-    $(CFLAGS) $(LIBS) $(WFLAGS)
+	$(CC) -o $(io_objs) \
+	$(CFLAGS) $(LIBS) $(WFLAGS)
 
 # Test files - triggered by the -t option
 ifneq (,$(findstring t,$(MAKEFLAGS)))
-    display= /IO/Display.cpp test/test_DIsplay.cpp
-    event=   /IO/Event.cpp   test/test_Event.cpp
-    level=   /IO/Level.cpp   test/test_Level.cpp
+    display= IO/Display.cpp test/test_Display.cpp
+    event=   IO/Event.cpp   test/test_Event.cpp
+    level=   IO/Level.cpp   test/test_Level.cpp
 else
-    display= /IO/Display.cpp 
-    event=   /IO/Event.cpp 
-    level=   /IO/Level.cpp 
+    display= IO/Display.cpp 
+    event=   IO/Event.cpp 
+    level=   IO/Level.cpp 
 endif
 
 # Object files
 display.o: $(display)
-    $(CC) $(WFLAGS) -c $(display)
+	$(CC) $(WFLAGS) -c $(display)
 
 event.o: $(display)
-    $(CC) $(WFLAGS) -c $(display)
+	$(CC) $(WFLAGS) -c $(display)
 
 level.o: $(level)
-    $(CC) $(WFLAGS) -c $(level)
+	$(CC) $(WFLAGS) -c $(level)
 
 ######################################################
 # AI files
@@ -55,4 +55,4 @@ level.o: $(level)
 
 
 clean: 
-    rm -f $(make_objs) $(io_objs)
+	rm -f $(make_objs) $(io_objs)

@@ -19,29 +19,28 @@ int Level::collision(CharMap *object) {
 }
 
 int inline Level::levelCollision(CharMap *object) {
-	for (int row = (*object).getLocation()->start_y;
-	     row < (*object).getLocation()->rows;
-	     row++) {
-		for (int col = (*object).getLocation()->start_x;
-		     col < (*object).getLocation()->cols;
-		     col++) {
-			if(window[row][col] =! ' ')
-				return 1;
-		}
-	}
-	return 0;
+    for (int row = (*object).getLocation()->start_y
+        ;row < (*object).getLocation()->rows
+	;row++) 
+        for (int col = (*object).getLocation()->start_x
+            ;col < (*object).getLocation()->cols
+            ;col++)
+            if(window[row][col] =! ' ')
+                return 1;
+    
+    return 0;
 }
 
 int inline Level::objectCollision(CharMap *object) {
-    for (int count = 0; count < objects.length; count++) {
-        if (object == objects[row]) // Objects can't collide with themselves
-            return = 0;
+    for (int count = 0; count < objs_index; count++) {
+        if (object == &objs[count]) // Objects can't collide with themselves
+            return 0;
          
-        Rect location = objects[count].location;
-        if (object.location->start_x > location->start_x + location->cols 
-        || (object.location->start_y > location->start_Y + location->rows) )
-            if (location->start_x > object.location->start_x + object.location->cols 
-            || (location->start_y > object.location->start_Y + object.location->rows) )
+        Rect location = new Rect(objs[count].getLocation());
+        if (object->location.start_x > location.start_x + location.cols 
+        || (object->location.start_y > location.start_y + location.rows) )
+            if (location.start_x > object->location.start_x + object->location.cols 
+            || (location.start_y > object->location.start_y + object->location.rows) )
                 return object.ID;
     }
     
@@ -67,7 +66,7 @@ Rect Level::getLocation() {
 }
 
 CharMap const *** Level::getObjects() {
-    return objects;
+    return objs;
 }
 
 // Mutators

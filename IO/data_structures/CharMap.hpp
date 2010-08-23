@@ -11,22 +11,32 @@
 #define CHARMAP_H_
 
 struct Rect {
-	int start_x; 
-	int start_y;
-	int cols;	//end_x = start_x + cols 
-	int rows;	//end_y = start_y + rows 
+    int start_x; 
+    int start_y;
+    int cols;	//end_x = start_x + cols 
+    int rows;	//end_y = start_y + rows
+    
+    Rect() {}
+    Rect(Rect *copy) {
+        this->start_x = copy->start_x;
+        this->start_y = copy->start_y;
+        this->cols = copy->cols;
+        this->rows = copy->rows;
+    }
+    ~Rect() {}
 };
 
 enum Direction { UP, DOWN, LEFT, RIGHT };
 
 class CharMap {
 protected:
-	Rect location;
 	char **map;	// A pointer to a static 2d char array.
 	int ID;		// Collision ID
 
 public:
-	// Constructor with parameters
+	Rect location;
+
+        // Constructor with parameters
 	CharMap(int start_x, int start_y, int cols, int rows, char **map);
 
 	// Copy constructor
