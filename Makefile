@@ -1,20 +1,21 @@
-# A pretty basic makefile for the XML parsing config loader system
-# Should run on the uni machines now...
+##
+# A Bacic makefile to test and setup our build files
+#     The test script is run by using the -t flag in make
+#
+
+# Explicitly use g++
 CC=g++
 
 # Compilation flags
-#CFLAGS=`pkg-config --cflags libxml++-2.6`
 #flags for libraries copied to a local subdirectory
 #CFLAGS = -Ilib/glibmm-2.4/include -Iinclude/glib-2.0 -Ilib/glib-2.0/include
 
 # More compilation flags, for warnings and errors
 WFLAGS=-W -Werror -ansi -pedantic
 
-# Libraries - statically links to things other than libm, glib, and pthread
-# Also using local subdirectories here
+# Libraries
+# Both static and dynamically linked libraries
 LIBS=-lncurses
-
-test=true
 
 make_objs = IO.o AI.o
 
@@ -22,7 +23,7 @@ load: $(make_objs)
     $(CC) -o $(make_objs) \
     $(CFLAGS) $(LIBS) $(WFLAGS)
 
-####################################
+######################################################
 # IO files
 io_objs = level.o display.o event.o
 
@@ -30,25 +31,28 @@ IO.o: $(io_objs)
     $(CC) -o $(io_objs) \
     $(CFLAGS) $(LIBS) $(WFLAGS)
 
-# Test files
-ifeq ($(test), true)
-    test_level=test/test_Level.cpp
-    test_display=test/test_DIsplay.cpp
-    test_event=test/test_Event.cpp
+# Test files - triggered by the -t option
+ifneq (,$(findstring t,$(MAKEFLAGS)))
+    display= /IO/Display.cpp test/test_DIsplay.cpp
+    event=   /IO/Event.cpp   test/test_Event.cpp
+    level=   /IO/Level.cpp   test/test_Level.cpp
+else
+    display= /IO/Display.cpp 
+    event=   /IO/Event.cpp 
+    level=   /IO/Level.cpp 
 endif
 
 # Object files
-level.o: Level.cpp $(level_test)
-    $(CC) $(WFLAGS) -c Level.cpp $(level_test)
- 
+display.o: $(display)
+    $(CC) $(WFLAGS) -c $(display)
 
-display.o: Display.cpp $(test_display) 
-    $(CC) $(WFLAGS) -c Display.cpp $(test_display) 
+event.o: $(display)
+    $(CC) $(WFLAGS) -c $(display)
 
-event.o: Event.cpp $(test_event) 
-    $(CC) $(WFLAGS) -c Event.cpp $(test_event) 
+level.o: $(level)
+    $(CC) $(WFLAGS) -c $(level)
 
-####################################
+######################################################
 # AI files
 # AI.o:
 
