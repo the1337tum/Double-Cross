@@ -1,3 +1,10 @@
+/**
+ * This is a two dimensional queue, that has been modified
+ * to store:
+ *      int hash;
+ *      char *string;
+**/
+
 // A Queue node for storing Queues
 struct PrimeNode {
     int hash;
