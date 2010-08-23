@@ -38,8 +38,13 @@ public:
         last = NULL;
     }
 
-    SLL(char *string) {
+    SLL(char *string) { //Hash is ignored, so search is longer.
         first = new Node(string);
+        last = NULL;
+    }
+
+    SLL(int hash, char *string) {
+        first = new Node(hash, string);
         last = NULL;
     }
 
