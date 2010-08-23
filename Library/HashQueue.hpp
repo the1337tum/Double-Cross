@@ -4,6 +4,8 @@
  *      int hash;
  *      char *string;
 **/
+#include <new.h>
+#include <string.h>
 
 // A Queue node for storing Queues
 struct PrimeNode {
