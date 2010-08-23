@@ -1,9 +1,10 @@
 #ifndef ARRAY_ALLOC_H_
 #define ARRAY_ALLOC_H_
 
+using namespace std;
+
 // creates a contiguious char array. Must templatise this at some point...
-template <typename Type>
-Type **alloc_array_2d(Type type, int rows, int cols) {
+char **alloc_array_2d_char(int rows, int cols) {
     char **row_ptr;  // row pointer
     char *array_ptr; // contiguious array pointer
     int index;
