@@ -5,24 +5,31 @@
 #include "Level.hpp"
 #include <ncurses.h>
 
+using namespace std;
+
 // Private Collision Method: returns ID of who it collided with - 1 for the map itself.
-const int Level::collision(CharMap *object) {
+int Level::collision(CharMap *object) {
     // Calculating object hits to reduce testing area, and double testing.
-    if (levelCollision(CharMap *object)) {
-        if (objectCollision(CharMap *object))
-            return object.ID;
+    if (levelCollision(object)) {
+        if (objectCollision(object))
+            return (*object).getID();
         return 1;
     }
     return 0;
 }
 
 int inline Level::levelCollision(CharMap *object) {
-    for (int row = object.location->start_y; row < object.location->rows; row++)
-        for (int col = object.location->start_x; col < object.location->cols; cols++)
-            if(window[row][col] =! ' ')
-                return 1;
-
-    return 0;
+	for (int row = (*object).getLocation()->start_y;
+	     row < (*object).getLocation()->rows;
+	     row++) {
+		for (int col = (*object).getLocation()->start_x;
+		     col < (*object).getLocation()->cols;
+		     col++) {
+			if(window[row][col] =! ' ')
+				return 1;
+		}
+	}
+	return 0;
 }
 
 int inline Level::objectCollision(CharMap *object) {
@@ -43,13 +50,15 @@ int inline Level::objectCollision(CharMap *object) {
 
 // Constructors and destructors
 Level::Level() {
-    printw("No map provided!\n");
+	arrayIndex = 0;
+	printw("No map provided!\n");
 }
 
 // Save and load rely on location for replaying
 Level::Level(char **map, Rect location) {
-    for (int row = location->start_y; row < location->rows; row++)
-        window[row] = map[row];
+	arrayIndex = 0;
+	for (int row = location->start_y; row < location->rows; row++)
+		window[row] = map[row];
 }
 
 // Accessors

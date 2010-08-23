@@ -4,11 +4,11 @@
 
 #include <stdio.h>
 #include "Movable.hpp"
-#include "Collidable.cpp"
+#include "CharMap.cpp"
 
 // Constructor with parameters
 Movable::Movable(int p_x, int p_y, int rows, int cols, char ***p_map) :
-	Collidable(p_x, p_y, rows, cols, p_map)
+	CharMap(p_x, p_y, rows, cols, p_map)
 {
 	printf("Constructing Movable object.\n");	// debug
 }
@@ -30,10 +30,4 @@ Movable& Movable::operator=(Movable const &m)
 // Destructor
 Movable::~Movable() {
 	printf("Destructing Movable object.\n");	//debug
-}
-
-// move(Direction)
-int Movable::move(Direction direction) {
-	(*map).move(direction);
-	return 0;
 }

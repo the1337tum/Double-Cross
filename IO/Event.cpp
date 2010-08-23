@@ -7,7 +7,7 @@
 #include "mylib.h"
 #include <Windows.h>
 
-using namespace Event;
+using namespace std;
 
 Event( const EventType type, int x, int y, const int identifier, const Team team, CharMap *charMap )
 : type( type ), identifier( identifier ), team( team ) {

@@ -17,7 +17,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "../data_structures/Projectile.cpp"
+#include "../AI/data_structures/Projectile.cpp"
 
 using namespace std;
 

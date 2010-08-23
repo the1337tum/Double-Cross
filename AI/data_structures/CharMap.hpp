@@ -13,16 +13,17 @@
 struct Rect {
 	int start_x; 
 	int start_y;
-	int cols;   //end_x = start_x + cols 
-	int rows;   //end_y = start_y + rows 
+	int cols;	//end_x = start_x + cols 
+	int rows;	//end_y = start_y + rows 
 };
 
 enum Direction { UP, DOWN, LEFT, RIGHT };
 
 class CharMap {
-private:
+protected:
 	Rect location;
-	char ***map; // A pointer to a static 2d char array.
+	char ***map;	// A pointer to a static 2d char array.
+	int ID;		// Collision ID
 
 public:
 	// Constructor with parameters
@@ -40,10 +41,11 @@ public:
 	// Accessors
 	Rect * getLocation();
 	char *** getMap();
+	int getID();
     
 	// Mutators
 	void move(Direction direction);
-	void replaceMap( CharMap *replacement );
+	void replaceMap( CharMap *replacement ); // TODO Test
 };
 
 #endif /* CHARMAP_H_ */

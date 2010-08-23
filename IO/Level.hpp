@@ -14,8 +14,9 @@
         - just adding an event queue and fork and loop in the constructor. */
 
 #include <map>
-#include "data_structures/CharMap.hpp"
+#include "../AI/data_structures/CharMap.hpp"
 
+#define WINDOW_SIZE 80
 #define MAX_OBJECTS 100 // The maximum number of objects in the event queue.
 // Identifiers (ID) - all other objects are > 2.
 // NOBODY 0
@@ -26,8 +27,8 @@ class Level {
 private:
 	static char **level;            // Char array for the level.
 	Rect location;                  // Location of the window.
-	// TODO Implement CyclicArray<E>
-//	CyclicArray<char *> window;     // Sliding display window.
+	// TODO Implement CyclicArray<char *>
+	CyclicArray<char *, WINDOW_SIZE> window;     // Sliding display window.
 	CharMap objects [MAX_OBJECTS];   // Array of the objects
 	int arrayIndex; // TODO Initialise arrayIndex
 
