@@ -8,20 +8,19 @@
 **/
 #include <string.h>
 #include "hashFunction.h"
-#include "alloc.h"
 #include "../Art/fileNames.h"
-#include "../IO/data_structures/Queue.hpp"
+#include "HashQueue.hpp"
 
-class String~HashQueue {
+class StringHash {
 private:
     PrimeQueue primeQueue;
 
 public:
     // Constructors and destructors
-    String~HashTree() { 
+    StringHash() { 
         tree = new BinarySearchTree(); 
     }
-    ~String~HashTree {
+    ~StringHash {
         delete tree;
     }
 
@@ -30,7 +29,7 @@ public:
     int search(char *candidate);
 
     // Mutators
-    void addString(char *newHash);
+    int addString(char *newHash); // Returns the hash
     void delString(char *newHash);
 };
 

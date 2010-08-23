@@ -2,14 +2,10 @@
 #include <string.h>
 
 // Accessors - Returns the ID if found
-int HashSLL::search(char *string) {
-    int hash = stringHash(string);
-    PrimeNode hashNode = primeQueue.search(hash);
-    if (hashNode != NULL) {
-        
-    }
-    
+int HashQueue::search(char *string) {
     PrimeNode hashNode;
+    for (hashNode = primeQueue.first; hashNode != NULL; hashNode = hashNode.next) {
+        
         SubNode stringNode;
         for (stringNode = hashNode.subQueue.first; stringNode != NULL; stringNode = stringNode.next)
             if (strcmp(string, stringNode.string))
@@ -19,7 +15,7 @@ int HashSLL::search(char *string) {
 }
 
 // Will return NULL on not found and ambiguity
-char *HashSLL::search(int hash) {
+char *HashQueue::search(int hash) {
     PrimeNode hashNode;
     for (hashNode = primeQueue.first; hashNode != NULL; hashNode = hashNode.next)
         if (hashNode.hash == hash) {
@@ -33,9 +29,9 @@ char *HashSLL::search(int hash) {
 }
 
 // Mutators returns the ID on successful insert
-int HashSLL::addString(char *newHash) {
+int String~HashQueue::addString(char *newHash) {
     
 }
-void HashSLL::delString(char *newHash) {
+void String~HashQueue::delString(char *newHash) {
 
 }

@@ -1,8 +1,8 @@
 /**
  * This is a two dimensional queue, that has been modified
  * to store:
- *      int hash;
- *      char *string;
+ *      PrimeNode  -  int hash;
+ *      SubNode    -  char *string;
 **/
 #include <new.h>
 #include <string.h>
@@ -19,74 +19,89 @@ struct PrimeNode {
 };
 
 // The outer queue - to store the hashes and subqueues
-class PrimeQueue {
+class PrimeSLL {
 private:
-        PrimeNode *first;
-	PrimeNode *last;
-	PrimeNode queue[length];
+    PrimeNode *first;
+    PrimeNode *last;
 
 public:
-	const int length;
-	
-	PrimeQueue(int size) : length(size) {
-		first = NULL;
-		last = NULL;
-		for (int node = 0; node < length; node++)
-			queue[node].next = &queue[(node + 1) % length];
-	}
-        
-	~PrimeQueue() {
-            PrimeNode *current = first;
-            while(current != NULL) {
-                PrimeNode *next = current.next;
-                delete current;
-            }
+    const int length;
+
+    PrimeSLL() {
+        first = NULL;
+        last = NULL;
+    }
+
+    ~PrimeQueue() {
+        PrimeNode *current = first;
+        while(current != NULL) {
+            PrimeNode *next = current.next;
+            delete current;
         }
-         
-	int isEmpty() { return first == NULL; }
+    }
+     
+    // Accessors     
+    int isEmpty() { return first == NULL; }
+    
+    const PrimeNode *search(int hash) {
+        for (PrimeNode *current = first; current != NULL; current = current.next)
+            if (hash == this->hash)
+                return 1;
+        return 0;
+    }
+   
+    // Mutators 
+    void put(int hash, char *string) {
+        if (isEmpty()) {
+            first = queue;
+            last = queue;
+            first = new PrimeNode(hash, string);
+        } else {
+            last->next = new PrimeNode(hash, string);
+            last = last->next;         
+        }
+    }
+    
+    const PrimeNode *get(int hash) {
+        if (isEmpty())
+            return NULL;
+            
+        for (PrimeNode *current = first; current != NULL; current = current.next)
+            if (hash == this->hash)
+                return current;
 
-	int isFull() { return last->next == first; }
-        
-	void put(int hash, char *string) {
-		if (isEmpty()) {
-			first = queue;
-			last = queue;
-			first = new PrimeNode(hash, string);
-		} else if (isFull()) {
-			return; 
-		} else {
-			last = last->next;
-			last = new PrimeNode(hash, string);
-		}
-	}
+        return NULL;
+    }
 
-	const PrimeNode *get() {
-		PrimeNode *result;
-
-		if (isEmpty()) { return NULL; }
-		if (first == last) {
-			result = first;
-                        delete first;
-			last = first = NULL;
-		} else {
-			result = first;
-                        PrimeNode *del = first;
-			first = first->next;
-                        delete del;
-		}
-		return result->data;
-	}
-
-	const PrimeNode *peek() {
-		if (!isEmpty()) { return first->data; }
-	}
-
+    void del(PrimeNode *del) {
+        PrimeNode *prev;
+        for (PrimeNode *current = first; current != NULL; current = current.next)
+            if (current == del)
+                if (first == last){                 // Only one node
+                    first = last = NULL;
+                    delete current;
+                    return;
+                } else if (prev == NULL) {          // First Node 
+                    first = current.next;
+                    delete current;
+                    return; 
+                } else if (current.next == NULL) {  // Last Node
+                    prev.next = NULL;
+                    last = prev;
+                    delete current; 
+                    return;
+                } else {                            // The middle of the list
+                    prev.next = current.next;
+                    delete current;
+                    return;
+                }
+    }
 };
 
 // The queue node to store the string to the hash.
 struct SubNode {
    char *string;
-   node *next;
+   SubNode *next;
 
     // optional constructor and destructor
     node(char *copy, SubNode *next) {
@@ -97,68 +112,86 @@ struct SubNode {
     ~node() { free(data); }
 };
 
-// The inner hashQueue
-class SubQueue {
+// The inner HashQueue
+class SubSLL {
 private:
-	SubNode *first;
-	SubNode *last;
-	SubNode queue[length];
+    SubNode *first;
+    SubNode *last;
 
 public:
-	const int length;
-	
-	SubQueue(int size) : length(size) {
-		first = NULL;
-		last = NULL;
-		for (int node = 0; node < length; node++)
-			queue[node].next = &queue[(node + 1) % length];
-	}
-        
-	~SubQueue() {
-            SubNode *current = first;
-            while(current != NULL) {
-                Node *next = current.next;
-                delete current;
-            }
+    // Constructor and Destructors
+    SubSLL() {
+        first = NULL;
+        last = NULL;
+    }
+
+    ~SubSLL() {
+        SubNode *current = first;
+        while(current != NULL) {
+            SubNode *next = current.next;
+            delete current;
+            current = next;
         }
-         
-	int isEmpty() { return first == NULL; }
+    }
 
-	int isFull() { return last->next == first; }
-        
-	void put(char *string) {
-		if (isEmpty()) {
-			first = queue;
-			last = queue;
-			first = new SubNode(string);
-		} else if (isFull()) {
-			return; 
-		} else {
-			last = last->next;
-			last = new Node(string);
-		}
-	}
+    // Accessors
+    int isEmpty() { return first == NULL; }
 
-	SubNode *get() {
-		SubNode *result;
+    PrimeNode *search(char *string) {
+        for (SubNode *current = first; current != NULL; current = current.next)
+            if (strcmp(string, current->string))
+                return 1;
+        return 0;
+    }
+    
+    // Mutators
+    int put(char *string) {
+        if(search(string))
+            return 0;
+        if (isEmpty()) {
+            first = queue;
+            last = queue;
+            first = new SubNode(string);
+        } else {
+            last->next = new SubNode(string);
+            last = last->next;         
+        }
+        return 1;
+    }
 
-		if (isEmpty()) { return NULL; }
-		if (first == last) {
-			result = first;
-                        delete first;
-			last = first = NULL;
-		} else {
-			result = first;
-                        Node *del = first;
-			first = first->next;
-                        delete del;
-		}
-		return result->string;
-	}
+    const PrimeNode *get(int hash) {
+        if (isEmpty())
+            return NULL;
+            
+        for (PrimeNode *current = first; current != NULL; current = current.next)
+            if (hash == this->hash)
+                return current;
 
-	SubNode *peek() {
-		if (!isEmpty()) { return first->string; }
-	}
+        return NULL;
+    }
 
+    void del(PrimeNode *del) {
+        PrimeNode *prev;
+        for (PrimeNode *current = first; current != NULL; current = current.next)
+            if (current == del)
+                if (first == last){                 // Only one node
+                    first = last = NULL;
+                    delete current;
+                    return;
+                } else if (prev == NULL) {          // First Node 
+                    first = current.next;
+                    delete current;
+                    return; 
+                } else if (current.next == NULL) {  // Last Node
+                    prev.next = NULL;
+                    last = prev;
+                    delete current; 
+                    return;
+                } else {                            // The middle of the list
+                    prev.next = current.next;
+                    delete current;
+                    return;
+                }
+    }
 };
 
