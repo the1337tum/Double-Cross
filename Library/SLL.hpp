@@ -2,7 +2,7 @@
  * This is a two dimensional SLL, that has been modified
  * to store:
  *      PrimeNode  -  int ID;
- *      Node       -  ItemType *data;
+ *      Node       -  ItemType *data; (pointers)
 **/
 #include <new>
 #include <string.h>
@@ -28,8 +28,8 @@ struct Node {
 template <typename ItemType>
 class SLL {
 private:
-    Node *first;
-    Node *last;
+    Node<ItemType> *first;
+    Node<ItemType> *last;
 
 public:
     // Constructor and Destructors
@@ -49,9 +49,9 @@ public:
     }
 
     ~SLL() {
-        Node *current = first;
+        Node<ItemType> *current = first;
         while(current != NULL) {
-            Node *next = current->next;
+            Node<ItemType> *next = current->next;
             delete current;
             current = next;
         }
@@ -59,43 +59,45 @@ public:
 
     // Accessors
     int isEmpty() { return first == NULL; }
+    const Node<ItemType> *getFirst() { return first; }
+    const Node<ItemType> *getLast() { return last; }
 
-    int getID(ItemType *data) {
-        if (isEmpty())
-            return 0;
-        
-        for (Node *current = first; current != NULL; current = current->next)
-            if (current == data)
-                return current->ID;
-        return 0;
-    }
-    
     int search(int ID) {
         if (isEmpty())
             return 0;
         
-        for (Node *current = first; current != NULL; current = current->next)
+        for (Node<ItemType> *current = first; current != NULL; current = current->next)
             if (current->getID() == ID)
                 return 1;
         return 0;
     }
 
-    const Node *getNode(ItemType *data) {
+    int getID(ItemType *data) {
+        if (isEmpty())
+            return 0;
+        
+        for (Node<ItemType> *current = first; current != NULL; current = current->next)
+            if (current == data)
+                return current->ID;
+        return 0;
+    }
+    
+    const Node<ItemType> *getNode(ItemType *data) {
         if (isEmpty())
             return NULL;
             
-        for (Node *current = first; current != NULL; current = current->next)
+        for (Node<ItemType> *current = first; current != NULL; current = current->next)
             if (current == data)
                 return current;
         
         return NULL;
     }
 
-    const Node *getNode(int ID) {
+    const Node<ItemType> *getNode(int ID) {
         if (isEmpty())
             return NULL;
             
-        for (Node *current = first; current != NULL; current = current->next)
+        for (Node<ItemType> *current = first; current != NULL; current = current->next)
             if (ID == current->ID)
                 return current;
 
@@ -107,9 +109,9 @@ public:
         if(getID(data))
             return 0; // No duplicates
         if (isEmpty()) {
-            first = new Node(ID, data);
+            first = new Node<ItemType>(ID, data);
         } else {
-            last->next = new Node(ID, data);
+            last->next = new Node<ItemType>(ID, data);
             last = last->next;
         }
         return 1;
@@ -119,21 +121,21 @@ public:
         if(getID(data)) 
             return 0; // No duplicates
         if (isEmpty()) {
-            first = new Node(data);
+            first = new Node<ItemType>(data);
         } else {
-            last->next = new Node(data);
+            last->next = new Node<ItemType>(data);
             last = last->next;
         }
         return 1;
     }
 
 
-    void del(Node *del) {
-        Node *prev;
+    void del(Node<ItemType> *del) {
+        Node<ItemType> *prev;
         if (isEmpty())
             return;
+        Node<ItemType> *current = first;
         do {
-            Node *current = first
             if (current == del)
                 if (prev == NULL) {                 // First Node 
                     first = current->next;
@@ -164,7 +166,7 @@ struct PrimeNode {
     PrimeNode *next;
 
     // optional constructor and destructor
-    PrimeNode(int key, char *string) : ID(key) { this->subSLL = new SLL(key, string); }
+    PrimeNode(int key, char *string) : ID(key) { this->subSLL = new SLL<ItemType>(key, string); }
     ~PrimeNode() { delete subSLL; }
 };
 
@@ -172,8 +174,8 @@ struct PrimeNode {
 template <typename ItemType>
 class PrimeSLL {
 private:
-    PrimeNode *first;
-    PrimeNode *last;
+    PrimeNode<ItemType> *first;
+    PrimeNode<ItemType> *last;
 
 public:
     PrimeSLL() {
@@ -182,9 +184,9 @@ public:
     }
 
     ~PrimeSLL() {
-        PrimeNode *current = first;
+        PrimeNode<ItemType> *current = first;
         while(current != NULL) {
-            PrimeNode *next = current->next;
+            PrimeNode<ItemType> *next = current->next;
             delete current;
         }
     }
@@ -193,17 +195,17 @@ public:
     int isEmpty() { return first == NULL; }
     
     int search(int ID) {
-        for (PrimeNode *current = first; current != NULL; current = current->next)
+        for (PrimeNode<ItemType> *current = first; current != NULL; current = current->next)
             if (ID == current->ID)
                 return 1;
         return 0;
     }
     
-    const PrimeNode *getNode(int ID) {
+    const PrimeNode<ItemType> *getNode(int ID) {
         if (isEmpty())
             return NULL;
             
-        for (PrimeNode *current = first; current != NULL; current = current->next)
+        for (PrimeNode<ItemType> *current = first; current != NULL; current = current->next)
             if (ID == current->ID)
                 return current;
 
@@ -215,9 +217,9 @@ public:
         if (isEmpty()) {
             first = new PrimeNode<ItemType>(ID, data);
         } else {
-            PrimeNode *node = getNode(ID);
+            PrimeNode<ItemType> *node = getNode(ID);
             if (node == NULL) {
-                last->next = new PrimeNode<ItemType>(ID, string);
+                last->next = new PrimeNode<ItemType>(ID, data);
                 last = last->next;
             } else {
                 node->subSLL->add(ID, data);
@@ -225,12 +227,12 @@ public:
         }
     }
 
-    void del(PrimeNode *del) {
-        PrimeNode *prev;
+    void del(PrimeNode<ItemType> *del) {
+        PrimeNode<ItemType> *prev;
         if (isEmpty())
             return;
+        PrimeNode<ItemType> *current = first;
         do {
-            PrimeNode *current = first
             if (current == del)
                 if (prev == NULL) {                 // First Node 
                     first = current->next;

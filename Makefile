@@ -22,7 +22,7 @@ load: $(make_objs)
 
 ######################################################
 # IO files
-io_objs = level.o display.o event.o
+io_objs= level.o display.o event.o
 
 IO.o: $(io_objs)
 	$(CC) -o $(io_objs) \

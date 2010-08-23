@@ -14,8 +14,8 @@
         - just adding an event queue and fork and loop in the constructor. */
 
 #include "../Library/SLL.hpp"
+#include "../Library/CyclicArray.hpp"
 #include "data_structures/CharMap.hpp"
-#include "data_structures/CyclicArray.hpp"
 
 #define WINDOW_SIZE 80
 #define MAX_OBJECTS 100 // The maximum number of objects in the event queue.
@@ -26,7 +26,7 @@
 
 class Level {
 private:
-    SLL objs;            // The SLL of objects currently on the map.
+    SLL<CharMap> *objs;  // The SLL of objects currently on the map.
     Rect location;       // Location of the window.
     static char **level; // Char array for the level.
     CyclicArray<char *, WINDOW_SIZE> window; // Sliding display window.
@@ -50,8 +50,8 @@ public:
     CharMap ***getObjects(); // Pointer (*) to the 2d array (**). 
         
     // Mutators
-    int addObject(CharMap const *map); // True if success, false if failed.
-    void delObject(CharMap const *map);// Removes an object on the map.
+    int addObject(CharMap *map); // True if success, false if failed.
+    void delObject(CharMap *map);// Removes an object on the map.
         
     void printLevel();  // Interfaces with ncurses to print the level.
 };

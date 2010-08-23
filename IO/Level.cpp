@@ -19,10 +19,10 @@ int Level::collision(CharMap *object) {
 }
 
 int inline Level::levelCollision(CharMap *object) {
-    for (int row = (*object).getLocation()->start_y
-        ;row < (*object).getLocation()->rows
+    for (int row = object->getLocation()->start_y
+        ;row < object->getLocation()->rows
 	;row++) 
-        for (int col = (*object).getLocation()->start_x
+        for (int col = object->getLocation()->start_x
             ;col < (*object).getLocation()->cols
             ;col++)
             if(window[row][col] =! ' ')
@@ -32,11 +32,11 @@ int inline Level::levelCollision(CharMap *object) {
 }
 
 int inline Level::objectCollision(CharMap *object) {
-    for (int count = 0; count < objs_index; count++) {
-        if (object == &objs[count]) // Objects can't collide with themselves
+    for (const Node<CharMap> *node = objs->getFirst(); node != NULL; node = node->next) {
+        if (object->getID() == node->ID) // Objects can't collide with themselves
             return 0;
          
-        Rect location = new Rect(objs[count].getLocation());
+        Rect location = new Rect(node->data->getLocation());
         if (object->location.start_x > location.start_x + location.cols 
         || (object->location.start_y > location.start_y + location.rows) )
             if (location.start_x > object->location.start_x + object->location.cols 
@@ -49,52 +49,47 @@ int inline Level::objectCollision(CharMap *object) {
 
 // Constructors and destructors
 Level::Level() {
-	arrayIndex = 0;
 	printw("No map provided!\n");
 }
 
 // Save and load rely on location for replaying
 Level::Level(char **map, Rect location) {
-	arrayIndex = 0;
-	for (int row = location->start_y; row < location->rows; row++)
-		window[row] = map[row];
+    objs = new SLL<CharMap>();
+    for (int row = location.start_y; row < location.rows; row++)
+        window[row] = map[row];
 }
+
+Level::~Level() { delete objs; }
 
 // Accessors
 Rect Level::getLocation() {
     return location;
 }
 
-CharMap const *** Level::getObjects() {
-    return objs;
-}
-
 // Mutators
-int Level::addObject(CharMap const *object) {
+int Level::addObject(CharMap *object) {
     if (collision(object))
         return 0;
-    
-    char *** new_map = map.getMap();
-    for (int x = 0; x < new_area->cols; x++) 
-        for (int y = 0; y < new_area->rows; y++)
-            window[x + new_area->start_x][y + area->start_y] = new_map*[x][y];
+   
+    Rect *area = object->getLocation();
+    char **map = object->getMap();
+    for (int x = 0; x < area->cols; x++) 
+        for (int y = 0; y < area->rows; y++)
+            window[x + area->start_x][y + area->start_y] = map[x][y];
     
     return 1;
 }
 
-void Level::delObject(CharMap const *map) {
-    for (int x = 0; x < map.location->cols; x++)
-        for (int y = 0; y < map.location->rows; y++)
-            window[x + map.location->start_x][y + map.location->start_y] = ' ';
-    
-    arrayIndex--;
+void Level::delObject(CharMap *map) {
+    for (int x = 0; x < map->location.cols; x++)
+        for (int y = 0; y < map->location.rows; y++)
+            window[x + map->location.start_x][y + map->location.start_y] = ' ';
 }
 
 // Interface method
 void Level::printLevel() {
-    for (int row = 0; row < location->rows; row++)
+    for (int row = 0; row < location.rows; row++)
         printw(level[row]);
     refresh();
-    }
 }
 
