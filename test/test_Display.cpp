@@ -1,19 +1,13 @@
 /*	Test the CharMap object * *	Tests:
- *	1)  Construct a CharMap object with parameters.
- *		PASS
- *	2)  Deep copy a CharMap object from another CharMap object. 
+ *	1)  Construct a Display object with parameters.
  *		FAIL
- *	3)  Destruct a CharMap object.
- *		PASS
- *	4)  Shallow copy a CharMap object from another CharMap object.
- *		UNTESTED
- *	5)  Read state from a CharMap object.
- *		PASS
+ *	2)  Destruct a CharMap object.
+ *		FAIL
  */
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "../AI/data_structures/CharMap.cpp"
+#include "../IO/Display.hpp"
 
 using namespace std;
 
@@ -75,3 +69,4 @@ int main() {
 
 	return 0;
 }
+
