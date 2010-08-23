@@ -2,30 +2,30 @@
  * This is a two dimensional SLL, that has been modified
  * to store:
  *      PrimeNode  -  int ID;
- *      Node       -  char *string;
+ *      Node       -  ItemType *data;
 **/
 #include <new>
 #include <string.h>
 #include "alloc.h" 
 
 // The node for the SSL
+template <typename ItemType>
 struct Node {
     int ID;
-    char *string;
+    ItemType *data;
     Node *next;
 
-    Node(char *string) {
-        this->string = (char*) emalloc(strlen(string));
-        strcpy(this->string, string);
+    Node(ItemType *data) {
+        this->data = data;
     }
-    Node(int ID, char *string) {
+    Node(int ID, ItemType *data) {
         this->ID = ID;
-        this->string = (char*) emalloc(strlen(string));
-        strcpy(this->string, string);
+        this->data = data;
     }
-    ~Node() { free(string); }
+    ~Node() { free(data); }
 };
 
+template <typename ItemType>
 class SLL {
 private:
     Node *first;
@@ -38,13 +38,13 @@ public:
         last = NULL;
     }
 
-    SLL(char *string) {
-        first = new Node(string);
+    SLL(ItemType *data) {
+        first = new Node<ItemType>(data);
         last = NULL;
     }
 
-    SLL(int ID, char *string) {
-        first = new Node(ID, string);
+    SLL(int ID, ItemType *data) {
+        first = new Node<ItemType>(ID, data);
         last = NULL;
     }
 
@@ -60,12 +60,12 @@ public:
     // Accessors
     int isEmpty() { return first == NULL; }
 
-    int getID(char *string) {
+    int getID(ItemType *data) {
         if (isEmpty())
             return 0;
         
         for (Node *current = first; current != NULL; current = current->next)
-            if (strcmp(string, current->string))
+            if (current == data)
                 return current->ID;
         return 0;
     }
@@ -80,12 +80,12 @@ public:
         return 0;
     }
 
-    const Node *getNode(char *string) {
+    const Node *getNode(ItemType *data) {
         if (isEmpty())
             return NULL;
             
         for (Node *current = first; current != NULL; current = current->next)
-            if (strcmp(string, current->string))
+            if (current == data)
                 return current;
         
         return NULL;
@@ -103,26 +103,26 @@ public:
     }
 
     // Mutators
-    int add(int ID, char *string) {
-        if(getID(string))
+    int add(int ID, ItemType *data) {
+        if(getID(data))
             return 0; // No duplicates
         if (isEmpty()) {
-            first = new Node(string);
+            first = new Node(ID, data);
         } else {
-            last->next = new Node(string);
-            last = last->next;         
+            last->next = new Node(ID, data);
+            last = last->next;
         }
         return 1;
     }
 
-    int add(char *string) {
-        if(getID(string)) // No duplicates
-            return 0;
+    int add(ItemType *data) {
+        if(getID(data)) 
+            return 0; // No duplicates
         if (isEmpty()) {
-            first = new Node(string);
+            first = new Node(data);
         } else {
-            last->next = new Node(string);
-            last = last->next;         
+            last->next = new Node(data);
+            last = last->next;
         }
         return 1;
     }
@@ -130,17 +130,16 @@ public:
 
     void del(Node *del) {
         Node *prev;
-        for (Node *current = first; current != NULL; current = current->next)
+        if (isEmpty())
+            return;
+        do {
+            Node *current = first
             if (current == del)
-                if (first == last){                 // Only one node
-                    first = last = NULL;
-                    delete current;
-                    return;
-                } else if (prev == NULL) {          // First Node 
+                if (prev == NULL) {                 // First Node 
                     first = current->next;
                     delete current;
                     return; 
-                } else if (current->next == NULL) {  // Last Node
+                } else if (current->next == NULL) { // Last Node
                     prev->next = NULL;
                     last = prev;
                     delete current; 
@@ -150,14 +149,18 @@ public:
                     delete current;
                     return;
                 }
+            prev = current;
+            current = current->next; 
+        } while (current != NULL);
     }
 };
 
 
 // A node for a two dimensional SLL
+template <typename ItemType>
 struct PrimeNode {
     int ID;
-    SLL *subSLL;
+    SLL<ItemType> subSLL;
     PrimeNode *next;
 
     // optional constructor and destructor
@@ -166,6 +169,7 @@ struct PrimeNode {
 };
 
 // The outer SLL
+template <typename ItemType>
 class PrimeSLL {
 private:
     PrimeNode *first;
@@ -207,28 +211,32 @@ public:
     }
    
     // Mutators 
-    void add(int ID, char *string) {
+    void add(int ID, ItemType *data) {
         if (isEmpty()) {
-            first = new PrimeNode(ID, string);
+            first = new PrimeNode<ItemType>(ID, data);
         } else {
-            last->next = new PrimeNode(ID, string);
-            last = last->next;
+            PrimeNode *node = getNode(ID);
+            if (node == NULL) {
+                last->next = new PrimeNode<ItemType>(ID, string);
+                last = last->next;
+            } else {
+                node->subSLL->add(ID, data);
+            }
         }
     }
 
     void del(PrimeNode *del) {
         PrimeNode *prev;
-        for (PrimeNode *current = first; current != NULL; current = current->next)
+        if (isEmpty())
+            return;
+        do {
+            PrimeNode *current = first
             if (current == del)
-                if (first == last){                 // Only one node
-                    first = last = NULL;
-                    delete current;
-                    return;
-                } else if (prev == NULL) {          // First Node 
+                if (prev == NULL) {                 // First Node 
                     first = current->next;
                     delete current;
                     return; 
-                } else if (current->next == NULL) {  // Last Node
+                } else if (current->next == NULL) { // Last Node
                     prev->next = NULL;
                     last = prev;
                     delete current; 
@@ -238,5 +246,8 @@ public:
                     delete current;
                     return;
                 }
+            prev = current;
+            current = current->next; 
+        } while (current != NULL);
     }
 };
