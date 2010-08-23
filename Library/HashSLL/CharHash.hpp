@@ -4,7 +4,7 @@
  * - Extremely fast at hashing new input values, at minimal 
  *   cost to space complexity.
  * - Worst case is linear in the scope of the global hash.
- * - Use in switch statement, with comparision to the stored string. 
+ * - Use in switch statement, with comparision to the stored string.
 **/
 #include <string.h>
 #include "hashFunction.h"

@@ -1,0 +1,6 @@
+We didn't actually end up using any of this,
+a string matcher this extreme just wasn't needed.
+Just a normal strcmp did the trick just fine, I feel.
+
+Over-engineered retardation - don't use it!
+

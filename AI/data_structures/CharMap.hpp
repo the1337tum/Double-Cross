@@ -22,30 +22,30 @@ enum Direction { UP, DOWN, LEFT, RIGHT };
 class CharMap {
 protected:
 	Rect location;
-	char ***map;	// A pointer to a static 2d char array.
+	char **map;	// A pointer to a static 2d char array.
 	int ID;		// Collision ID
 
 public:
 	// Constructor with parameters
-	CharMap( int start_x, int start_y, int cols, int rows, char ***map );
+	CharMap(int start_x, int start_y, int cols, int rows, char **map);
 
 	// Copy constructor
-	CharMap( CharMap const &);
+	CharMap(CharMap const &);
 
 	// Assignment operator
-	CharMap & operator=(CharMap const &);
+	CharMap &operator=(CharMap const &);
 
 	// Destructor
 	virtual ~CharMap(void);
     
 	// Accessors
-	Rect * getLocation();
-	char *** getMap();
+	Rect *getLocation();
+	char **getMap();
 	int getID();
     
 	// Mutators
 	void move(Direction direction);
-	void replaceMap( CharMap *replacement ); // TODO Test
+	void replaceMap(char **); // TODO Test
 };
 
 #endif /* CHARMAP_H_ */
