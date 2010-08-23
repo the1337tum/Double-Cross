@@ -14,7 +14,7 @@ WFLAGS=-W -Werror -ansi -pedantic
 # Also using local subdirectories here
 LIBS=-lncurses
 
-
+test=true
 
 make_objs = IO.o AI.o
 
@@ -22,33 +22,33 @@ load: $(make_objs)
     $(CC) -o $(make_objs) \
     $(CFLAGS) $(LIBS) $(WFLAGS)
 
+####################################
 # IO files
 io_objs = level.o display.o event.o
+
 IO.o: $(io_objs)
-ifeq ($(test), true)
     $(CC) -o $(io_objs) \
     $(CFLAGS) $(LIBS) $(WFLAGS)
-else
-endif
 
-level.o: Level.cpp
+# Test files
 ifeq ($(test), true)
-    $(CC) $(WFLAGS) -c Level.cpp
-else
+    test_level=test/test_Level.cpp
+    test_display=test/test_DIsplay.cpp
+    test_event=test/test_Event.cpp
 endif
 
-display.o: Display.cpp
-ifeq ($(test), true)
-    $(CC) $(WFLAGS) -c Display.cpp
-else
-endif
+# Object files
+level.o: Level.cpp $(level_test)
+    $(CC) $(WFLAGS) -c Level.cpp $(level_test)
+ 
 
-event.o: Event.cpp
-ifeq ($(test), true)
-    $(CC) $(WFLAGS) -c Event.cpp
-else
-endif
+display.o: Display.cpp $(test_display) 
+    $(CC) $(WFLAGS) -c Display.cpp $(test_display) 
 
+event.o: Event.cpp $(test_event) 
+    $(CC) $(WFLAGS) -c Event.cpp $(test_event) 
+
+####################################
 # AI files
 # AI.o:
 
