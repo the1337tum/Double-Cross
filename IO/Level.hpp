@@ -26,36 +26,34 @@
 
 class Level {
 private:
-	static char **level;            // Char array for the level.
-	Rect location;                  // Location of the window.
-	CyclicArray<char *, WINDOW_SIZE> window; // Sliding display window.
-	CharMap[MAX_OBJECTS] objs;     // Array of the objects
-	int objs_index;
+    SLL objs;            // The SLL of objects currently on the map.
+    Rect location;       // Location of the window.
+    static char **level; // Char array for the level.
+    CyclicArray<char *, WINDOW_SIZE> window; // Sliding display window.
         
-        int find_obj(
-	int collision(CharMap *object); // Cannot collide with itself.
-	int inline levelCollision(CharMap *object);
-	int inline objectCollision(CharMap *object);
+    int collision(CharMap *object); // Cannot collide with itself.
+    int inline levelCollision(CharMap *object);
+    int inline objectCollision(CharMap *object);
 
 public:
-	// Default constructor
-	Level();
-
-	// Constructor with parameters
-	Level(char **map, Rect location);
-
-	// Destructor
-	virtual ~Level();
-     
-	// Accessors
-	Rect getLocation(); // The location of the sliding window.
-	CharMap ***getObjects(); // Pointer (*) to the 2d array (**). 
+    // Default constructor
+    Level();
     
-	// Mutators
-	int addObject(CharMap const *map); // True if success, false if failed.
-	void delObject(CharMap const *map);// Removes an object on the map.
+    // Constructor with parameters
+    Level(char **map, Rect location);
     
-	void printLevel();  // Interfaces with ncurses to print the level.
+    // Destructor
+    virtual ~Level();
+         
+    // Accessors
+    Rect getLocation(); // The location of the sliding window.
+    CharMap ***getObjects(); // Pointer (*) to the 2d array (**). 
+        
+    // Mutators
+    int addObject(CharMap const *map); // True if success, false if failed.
+    void delObject(CharMap const *map);// Removes an object on the map.
+        
+    void printLevel();  // Interfaces with ncurses to print the level.
 };
 
 #endif /* LEVEL_H_ */
