@@ -5,6 +5,8 @@
 #include "Level.hpp"
 #include <ncurses.h>
 
+using namespace std;
+
 // Private Collision Method: returns ID of who it collided with - 1 for the map itself.
 int Level::collision(CharMap *object) {
     // Calculating object hits to reduce testing area, and double testing.
